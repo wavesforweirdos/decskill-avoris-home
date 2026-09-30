@@ -1,0 +1,8 @@
+# Normaliza los saltos de línea a LF en todos los sistemas
+* text=auto eol=lf
+# Binarios: sin conversión
+*.png   binary
+*.jpg   binary
+*.webp  binary
+*.avif  binary
+*.woff2 binary
