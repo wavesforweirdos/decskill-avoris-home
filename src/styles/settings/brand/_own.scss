@@ -11,4 +11,5 @@ $page-background: $color-background-white-default;
 $page-text: $color-foreground-on-light-default;
 $focus-ring-color: $primary-700; // D-19
 $focus-ring-halo: $basic-000-white; // D-19
+$slider-control-underlay: $color-background-white-default; // relleno blanco opaco que el Figma pone bajo el 32 % de la flecha (D-20)
 $footer-border-top-default: $color-border-medium-default; // Brand no define borde del footer; sí lo dibuja el Figma (D-35)
