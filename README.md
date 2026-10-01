@@ -65,7 +65,7 @@ primitivos                  →   semánticos                    →   component
 (settings/_primitives)          (settings/_semantic,              (components/**)
                                  settings/brands/)
 
---color-purple-600          →   --color-primary               →   .button--primary {
+--color-primary-700         →   --color-primary               →   .button--primary {
                                                                     background-color: var(--color-primary);
                                                                   }
 ```
