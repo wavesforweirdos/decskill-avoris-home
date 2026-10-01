@@ -13,6 +13,9 @@ export default defineConfig({
     cssTarget: ['chrome120', 'safari16.4', 'firefox120'],
   },
   css: {
+    // En desarrollo, las DevTools enlazan cada regla con su línea del SCSS, donde se ve el nombre
+    // de la variable de color (p. ej. $button-primary-background-default).
+    devSourcemap: true,
     preprocessorOptions: {
       // Permite escribir @use 'styles/tools' desde cualquier componente, sin rutas relativas largas.
       scss: { loadPaths: [fromRoot('src')] },

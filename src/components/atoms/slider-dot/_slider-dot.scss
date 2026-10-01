@@ -1,21 +1,22 @@
+@use 'styles/settings/brand' as *;
+
 // Punto del indicador del carrusel. Es solo un indicador visual (D-23): no es interactivo, no
 // recibe foco y va con aria-hidden. La navegación va por las flechas (slider-control, de 40 px) y la
 // posición se anuncia con una región aria-live ("Diapositiva 2 de 3") que añade el carrusel.
 // Al no haber objetivos pequeños, la separación de 8 px del Figma no incumple WCAG 2.5.8. Esa
 // separación (--space-sm) la pone el contenedor que agrupa los puntos.
 .slider-dot {
-  --slider-dot-mix: 72%;
-
   display: block;
   width: var(--size-dot);
   height: var(--size-dot);
-  border: var(--border-width) solid var(--color-on-media);
+  border: var(--border-width) solid $indicator-slider-border-default;
   border-radius: 50%;
-  background-color: color-mix(in srgb, var(--color-on-media) var(--slider-dot-mix), transparent);
+  background-color: $indicator-slider-background-default;
 }
 
 .slider-dot--current {
-  background-color: var(--color-accent);
+  border-color: $indicator-slider-border-selected-default;
+  background-color: $indicator-slider-background-selected-default;
 
   // Alto contraste de Windows: sin esto el punto actual pierde el relleno y no se distingue.
   @media (forced-colors: active) {

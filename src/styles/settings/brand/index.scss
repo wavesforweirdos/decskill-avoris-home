@@ -1,0 +1,6 @@
+// Colores de la marca, en los tres niveles de la página Brand del Figma. Cada nivel solo usa los
+// anteriores y los componentes únicamente usan los de components/ y own (lo hace cumplir Stylelint).
+@forward 'global';
+@forward 'semantic';
+@forward 'own';
+@forward 'components';

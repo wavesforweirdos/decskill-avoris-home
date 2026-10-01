@@ -1,31 +1,11 @@
 @use '../tools' as *;
 
-// Paleta cruda del Figma: valores sin intención asociada. NO se usan en componentes, solo desde
-// settings/. Los componentes consumen los semánticos (_semantic.scss y brands/), y Stylelint lo
-// hace cumplir (stylelint.config.js). Los números son los del diseño: 600 es el morado de marca,
-// 24 son 24 px, y así.
+// Valores crudos del Figma que no dependen de la marca: espaciado, tamaños, radios, sombras y
+// tipografía. NO se usan en componentes, solo desde settings/: los componentes consumen los
+// semánticos de _semantic.scss, y Stylelint lo hace cumplir (stylelint.config.js). Los números son
+// los del diseño: 24 son 24 px, y así. Los colores, que sí cambian por marca, viven aparte en
+// brand/.
 :root {
-  // Color
-  --color-white: #fff;
-  --color-cream-50: #fbf6f4;
-  --color-cream-100: #f4e8e1;
-  --color-grey-200: #e0d9e0;
-  --color-grey-300: #d1c7d1;
-  --color-grey-400: #a0989f;
-  --color-grey-500: #817781;
-  --color-grey-600: #786f78;
-  --color-grey-700: #635a63;
-  --color-grey-800: #494149;
-  --color-grey-900: #342e34;
-  --color-grey-950: #2d242d;
-  --color-purple-600: #622f60;
-  --color-purple-700: #471f45;
-  --color-orange-400: #ff8f50;
-  --color-orange-500: #d67843;
-  --color-orange-700: #b25927;
-  --color-brown-900: #6b2700;
-  --color-brown-950: #4b1b00;
-
   // Espaciado
   --space-2: #{rem(2)};
   --space-4: #{rem(4)};

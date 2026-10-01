@@ -1,3 +1,5 @@
+@use 'styles/settings/brand' as *;
+
 // Botón pill con tres variantes (primary, secondary, accent) y tres tamaños (sm, base, lg).
 // Cada variante solo reasigna las propiedades locales --button-*; la forma es común.
 .button {
@@ -12,7 +14,8 @@
   min-height: var(--button-min-height);
 
   // El borde (transparente en primary y accent) hace que todas las variantes midan lo mismo; se
-  // resta del padding porque en el Figma el trazo va dentro de la caja.
+  // resta del padding porque en el Figma el trazo va dentro de la caja. Brand define borde para
+  // primary y accent, pero el diseño no lo dibuja, así que no se usa.
   padding-inline: calc(var(--button-padding-x) - var(--border-width));
   border: var(--border-width) solid var(--button-border);
   border-radius: var(--radius-control);
@@ -46,35 +49,37 @@
 }
 
 .button--primary {
-  --button-bg: var(--color-primary);
-  --button-fg: var(--color-on-primary);
+  --button-bg: #{$button-primary-background-default};
+  --button-fg: #{$button-primary-text-default};
   --button-border: transparent;
 
   &:is(:hover, :active) {
-    --button-bg: var(--color-primary-hover);
+    --button-bg: #{$button-primary-background-hover};
+    --button-fg: #{$button-primary-text-hover};
   }
 }
 
 .button--secondary {
-  --button-bg: var(--color-surface);
-  --button-fg: var(--color-primary);
-  --button-border: var(--color-primary);
+  --button-bg: #{$button-secondary-background-default};
+  --button-fg: #{$button-secondary-text-default};
+  --button-border: #{$button-secondary-border-default};
 
   &:is(:hover, :active) {
-    --button-fg: var(--color-primary-hover);
-    --button-border: var(--color-primary-hover);
+    --button-bg: #{$button-secondary-background-hover};
+    --button-fg: #{$button-secondary-text-hover};
+    --button-border: #{$button-secondary-border-hover};
   }
 }
 
 // Acento: el botón naranja sobre fondo oscuro (el CTA del hero).
 .button--accent {
-  --button-bg: var(--color-accent);
-  --button-fg: var(--color-on-accent);
+  --button-bg: #{$button-accent-background-default};
+  --button-fg: #{$button-accent-text-default};
   --button-border: transparent;
 
   &:is(:hover, :active) {
-    --button-bg: var(--color-accent-hover);
-    --button-fg: var(--color-on-accent-hover);
+    --button-bg: #{$button-accent-background-hover};
+    --button-fg: #{$button-accent-text-hover};
   }
 }
 
@@ -85,16 +90,17 @@
 }
 
 .button--primary:is(:disabled, [aria-disabled='true']) {
-  --button-bg: var(--color-disabled);
-  --button-fg: var(--color-disabled-text);
+  --button-bg: #{$button-primary-background-disabled};
+  --button-fg: #{$button-primary-text-disabled};
 }
 
 .button--secondary:is(:disabled, [aria-disabled='true']) {
-  --button-fg: var(--color-disabled-text);
-  --button-border: var(--color-disabled-strong);
+  --button-bg: #{$button-secondary-background-disabled};
+  --button-fg: #{$button-secondary-foreground-disabled};
+  --button-border: #{$button-secondary-border-disabled};
 }
 
 .button--accent:is(:disabled, [aria-disabled='true']) {
-  --button-bg: var(--color-disabled-strong);
-  --button-fg: var(--color-on-accent-disabled);
+  --button-bg: #{$button-accent-background-disabled};
+  --button-fg: #{$button-accent-text-disabled};
 }

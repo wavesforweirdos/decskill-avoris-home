@@ -1,13 +1,11 @@
 @use '../tools' as *;
 
-// TOKENS SEMÁNTICOS. Regla primitivos → semánticos:
-// los primitivos (_primitives.scss) son la paleta cruda del Figma y nunca los usa un componente.
-// Los semánticos de este archivo expresan intención (--color-primary, --space-section,
-// --text-button…) y son lo ÚNICO que consumen los componentes.
-// Por qué dos niveles: si un componente usara --color-purple-600, cambiar de marca obligaría a
-// tocar cada componente. Con --color-primary solo se reasigna el semántico, una vez, en brands/.
-// Los colores son los que cambian por marca y por eso viven en brands/_default.scss; aquí están
-// el resto de familias (espaciado, tamaños, radios, sombras y tipografía).
+// TOKENS SEMÁNTICOS (todo menos el color). Regla primitivos → semánticos: los primitivos
+// (_primitives.scss) son los valores crudos del Figma y nunca los usa un componente. Los semánticos
+// de este archivo expresan intención (--space-section, --text-button…) y son lo ÚNICO que
+// consumen los componentes. Son propiedades CSS porque no dependen de la marca.
+// El color sigue otra lógica, porque cambia por marca: variables de Sass en tres niveles dentro de
+// brand/.
 
 :root {
   // Espaciado: escala general y valores por intención. Los de 10 y 14 px son los que dibuja el
