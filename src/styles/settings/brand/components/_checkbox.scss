@@ -1,0 +1,14 @@
+@use '../semantic' as *;
+
+// NIVEL 3 · COMPONENTE: checkbox (Figma: form/checkbox). Nombre de Figma cambiando la barra por un guion.
+
+$form-checkbox-box-background-default: $color-background-white-default;
+$form-checkbox-box-background-hover: $color-background-white-default;
+$form-checkbox-box-background-selected: $color-background-secondary-medium-default;
+$form-checkbox-box-background-selected-hover: $color-background-secondary-medium-hover;
+$form-checkbox-box-border-default: $color-border-primary-dark-default;
+$form-checkbox-box-border-hover: $color-border-primary-dark-hover;
+$form-checkbox-box-border-selected: $color-border-primary-dark-default;
+$form-checkbox-box-border-selected-hover: $color-border-primary-dark-hover;
+$form-checkbox-check-icon-default: $color-icon-primary-dark-default;
+$form-checkbox-check-icon-hover: $color-icon-primary-dark-hover;

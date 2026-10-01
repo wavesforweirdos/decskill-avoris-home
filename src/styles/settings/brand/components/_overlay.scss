@@ -1,0 +1,6 @@
+@use '../semantic' as *;
+
+// NIVEL 3 · COMPONENTE: overlay (burbuja del info-tooltip) (Figma: overlay/…). Nombre de Figma cambiando la barra por un guion.
+
+$overlay-background-default: $color-background-white-default;
+$overlay-text-default: $color-foreground-text-on-light-default;

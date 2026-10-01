@@ -1,0 +1,13 @@
+@use 'global' as *;
+@use 'semantic' as *;
+
+// SIN EQUIVALENTE EN FIGMA. Variables propias del proyecto, con nombre propio. Las usan los
+// componentes igual que las de components/.
+
+$section-title-default: $color-foreground-on-light-default; // D-11 (el Figma usa #2F222F)
+$circuit-card-grid-title-default: $color-foreground-on-light-default; // título de grupo ("Asia")
+$info-tooltip-icon-default: $color-icon-black-default; // el Figma usa color/icon/black-default
+$page-background: $color-background-white-default;
+$page-text: $color-foreground-on-light-default;
+$focus-ring-color: $primary-700; // D-19
+$focus-ring-halo: $basic-000-white; // D-19

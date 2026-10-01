@@ -1,0 +1,6 @@
+@use '../semantic' as *;
+
+// NIVEL 3 · COMPONENTE: heading (Figma: hero/…, filters/…). Nombre de Figma cambiando la barra por un guion.
+
+$hero-title-default: $color-foreground-on-dark-default;
+$filters-section-title-default: $color-foreground-on-light-default;
