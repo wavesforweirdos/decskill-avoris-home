@@ -24,11 +24,9 @@
   }
 
   // El anillo de foco global va por fuera, y aquí la pestaña ocupa todo el alto de la barra y toca
-  // el borde de la página, donde se cortaría. Se dibuja hacia dentro: el anillo en el borde de la
-  // caja y el halo claro justo debajo (D-19).
+  // el borde de la página, donde se cortaría: se dibuja hacia dentro (D-19).
   &:focus-visible {
-    outline-offset: calc(-1 * var(--border-width-strong));
-    box-shadow: inset 0 0 0 calc(2 * var(--border-width-strong)) $focus-ring-halo;
+    @include focus-ring-inset;
   }
 
   @include mq(tablet-large) {
