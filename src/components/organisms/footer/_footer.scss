@@ -1,7 +1,7 @@
 @use 'styles/settings/brand' as *;
 @use 'styles/tools' as *;
 
-// Footer de la home: logo y barra de copyright (D-16). El logo va a la izquierda y desde 1280 centrado.
+// Footer de la home: logo y barra de copyright. El logo va a la izquierda y desde 1280 centrado.
 // La línea superior se dibuja dentro de los 180 px del Figma, por eso se resta del padding superior.
 .footer {
   border-block-start: var(--border-width) solid $footer-border-top-default;

@@ -1,5 +1,5 @@
 // Icono SVG pintado con una máscara: el color sale de currentcolor (y por tanto de los tokens) sin
-// modificar el SVG exportado del Figma (D-17). Siempre es decorativo: va con aria-hidden y, si es
+// modificar el SVG exportado del Figma. Siempre es decorativo: va con aria-hidden y, si es
 // lo único que lleva un botón, el botón lleva aria-label.
 .icon {
   --icon-size: var(--size-icon-md);

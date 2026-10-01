@@ -2,7 +2,7 @@
 @use 'styles/tools' as *;
 
 // Diapositiva del hero: foto de fondo, velo, texto centrado y botón. Mide lo que la pista (400 px).
-// El padding deja libres las flechas (40 px) más el del contenedor de texto del Figma (D-40), y abajo
+// El padding deja libres las flechas (40 px) más el del contenedor de texto del Figma, y abajo
 // reserva el hueco de los puntos, que van fuera de la pista (así el texto se centra en los 326 px
 // que dibuja el Figma, no en los 400).
 .hero-slide {
@@ -20,7 +20,7 @@
   scroll-snap-align: start;
   scroll-snap-stop: always;
 
-  // Velo sobre la foto y bajo el texto (D-41).
+  // Velo sobre la foto y bajo el texto.
   &::before {
     content: '';
     position: absolute;
@@ -42,7 +42,7 @@
 }
 
 // La foto se ancla arriba a la izquierda y no se escala por debajo de 1440 px de ancho: el Figma
-// enseña en cada ancho la parte izquierda de la misma imagen (D-40). Por encima, cover la amplía.
+// enseña en cada ancho la parte izquierda de la misma imagen. Por encima, cover la amplía.
 .hero-slide__photo {
   width: 100%;
   height: 100%;
@@ -63,7 +63,7 @@
   font: var(--text-hero-subtitle);
 }
 
-// El botón es base y, en móvil, lg (D-43). No se parte en dos líneas: el Figma lo dibuja de 246 px,
+// El botón es base y, en móvil, lg. No se parte en dos líneas: el Figma lo dibuja de 246 px,
 // 16 más que el contenedor, y se centra desbordando por igual a cada lado (por eso la diapositiva
 // lleva min-width: 0: sin él, el ancho mínimo del botón la ensancharía).
 .hero-slide__cta {

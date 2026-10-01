@@ -1,7 +1,7 @@
 @use 'styles/settings/brand' as *;
 
 // Campo de texto pill con icono. La etiqueta existe pero va oculta (u-visually-hidden), porque el
-// layout de la home dibuja solo el placeholder, sin etiqueta visible (D-25). Un placeholder no
+// layout de la home dibuja solo el placeholder, sin etiqueta visible. Un placeholder no
 // sustituye a una etiqueta para lectores de pantalla.
 .text-input {
   display: flex;

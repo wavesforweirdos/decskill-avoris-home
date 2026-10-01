@@ -1,6 +1,6 @@
 @use '../settings/brand' as *;
 
-// Anillo de foco de dos tonos (ver D-19): el halo claro separa el anillo del elemento, así se ve tanto
+// Anillo de foco de dos tonos: el halo claro separa el anillo del elemento, así se ve tanto
 // sobre fondos claros como sobre la imagen oscura del hero. outline sigue el border-radius.
 @mixin focus-ring {
   outline: var(--border-width-strong) solid $focus-ring-color;

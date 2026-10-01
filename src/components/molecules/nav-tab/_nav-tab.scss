@@ -24,7 +24,7 @@
   }
 
   // El anillo de foco global va por fuera, y aquí la pestaña ocupa todo el alto de la barra y toca
-  // el borde de la página, donde se cortaría: se dibuja hacia dentro (D-19).
+  // el borde de la página, donde se cortaría: se dibuja hacia dentro.
   &:focus-visible {
     @include focus-ring-inset;
   }
@@ -40,7 +40,7 @@
 }
 
 // Activa: texto en negrita, subrayado de 2 px a todo el ancho de la pestaña y triángulo marcador
-// (18 × 12) centrado sobre él, tanto en horizontal como en el menú apilado (D-33).
+// (18 × 12) centrado sobre él, tanto en horizontal como en el menú apilado.
 .nav-tab--current {
   --nav-tab-fg: #{$tab-navbar-text-selected};
   --nav-tab-icon: #{$tab-navbar-icon-selected};

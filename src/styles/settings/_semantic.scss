@@ -9,7 +9,7 @@
 
 :root {
   // Espaciado: escala general y valores por intención. Los de 10 y 14 px son los que dibuja el
-  // Figma en controles, que la escala no cubre (ver D-24).
+  // Figma en controles, que la escala no cubre.
   --space-3xs: var(--space-2);
   --space-2xs: var(--space-4);
   --space-xs: var(--space-6);
@@ -75,7 +75,7 @@
   --z-skip-link: 3;
 
   // Tipografía: familias y roles. Cada rol es el atajo `font` (peso, tamaño/interlineado, familia),
-  // se usa con `font: var(--text-button)`. Ver D-06: solo Syne (títulos) y Nunito (todo lo demás).
+  // se usa con `font: var(--text-button)`. Solo Syne (títulos) y Nunito (todo lo demás).
   --font-heading: var(--font-family-syne);
   --font-body: var(--font-family-nunito);
   --text-body: var(--font-weight-400) var(--font-size-16) / var(--line-height-24) var(--font-body);

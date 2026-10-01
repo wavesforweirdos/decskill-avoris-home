@@ -7,7 +7,7 @@ html {
   font: var(--text-body);
 }
 
-// Foco visible para teclado en cualquier elemento interactivo (D-19). Los componentes que dibujan
+// Foco visible para teclado en cualquier elemento interactivo. Los componentes que dibujan
 // su propio indicador, como el input, lo sustituyen.
 :focus-visible {
   @include focus-ring;

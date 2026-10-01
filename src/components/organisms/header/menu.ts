@@ -1,7 +1,7 @@
 // Menú del navbar por debajo de 1024 px. La visibilidad del botón y del panel la decide el CSS
 // (@media (scripting: enabled)); este módulo solo gestiona el estado: abrir, cerrar, Escape, clic
 // fuera y devolver el foco. Si el módulo no llega a cargarse con JavaScript activo, el botón queda
-// sin función (D-34).
+// sin función.
 
 const STATE_ATTRIBUTE = 'data-menu';
 

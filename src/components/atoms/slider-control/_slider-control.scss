@@ -16,7 +16,7 @@
   border-radius: var(--radius-slider-control);
 
   // Como en el Figma: el color de Brand (primary-700 al 32 %) sobre un relleno blanco opaco, de modo
-  // que el aspecto no depende de la foto que haya detrás (D-20).
+  // que el aspecto no depende de la foto que haya detrás.
   background-color: $slider-control-underlay;
   background-image: linear-gradient(
     $button-slider-navigation-background-default,

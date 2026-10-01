@@ -5,8 +5,8 @@
 $hero-title-default: $color-foreground-on-dark-default;
 $hero-subtitle-default: $color-foreground-on-dark-default;
 
-// Velo negro del 10 % sobre la foto, sin equivalente en Brand (D-41). El Figma tiene una capa negra
+// Velo negro del 10 % sobre la foto, sin equivalente en Brand. El Figma tiene una capa negra
 // del 24 % sobre la imagen, pero está oculta en el diseño. Sin velo, el subtítulo blanco baja a
-// 4,03:1 en el peor píxel (AA pide 4,5:1 en texto normal); con este velo cumple. Es un hex con alpha
+// 4,13:1 en el peor píxel (AA pide 4,5:1 en texto normal); con este velo cumple. Es un hex con alpha
 // (0x1a = 10,2 %) porque en la paleta no hay negro.
 $hero-veil-default: #0000001a;

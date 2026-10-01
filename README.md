@@ -91,3 +91,4 @@ La multimarca es por compilación: cada marca genera su propio CSS a partir del 
 ## Mejoras que haría con más tiempo
 
 - **Estado abierto del menú de navegación:** el Figma no lo dibuja. Hoy se muestran las mismas pestañas y el botón "Reserva" apilados bajo la barra, sin diseño propio; falta que diseño defina su aspecto (fondo, separación, marcador de la pestaña activa) para sustituir esta versión mínima.
+- **Contraste de las flechas del carrusel:** el icono blanco queda a 1,81:1 sobre el fondo de Brand (el 32 % de morado sobre blanco), por debajo del 3:1 que exige WCAG 1.4.11. Hay dos soluciones: subir la opacidad del fondo al 56 % (icono a 3,05:1) o, manteniendo el fondo, pintar el icono con el morado de la marca (`$color-icon-primary-dark-default`, 5,55:1). El cambio está aislado en `src/styles/settings/brand/components/_slider.scss`.
