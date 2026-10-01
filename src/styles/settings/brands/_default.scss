@@ -10,14 +10,24 @@
   --color-on-primary: var(--color-white);
   --color-accent: var(--color-orange-400);
   --color-accent-hover: var(--color-orange-500);
-  --color-on-accent: var(--color-brown-900); // D-04
-  --color-on-accent-hover: var(--color-brown-950); // D-05
-  --color-accent-strong: var(--color-orange-700); // D-01, D-02
+
+  // Texto sobre el naranja, 4,85:1. El Figma lo cambió de blanco a #6b2700 en su historial (D-04).
+  --color-on-accent: var(--color-brown-900);
+
+  // En hover, #6b2700 sobre el naranja oscuro daba 3,46:1; este es el mínimo que llega a 4,5:1 (D-05).
+  --color-on-accent-hover: var(--color-brown-950);
+
+  // Naranja de texto: el #b85c28 del Figma da 4,26:1 sobre el crema del panel de filtros; este es
+  // el mínimo que cumple AA sobre blanco y crema (D-01, D-02).
+  --color-accent-strong: var(--color-orange-700);
 
   // Texto
   --color-text: var(--color-grey-900);
   --color-text-hover: var(--color-grey-950);
-  --color-text-muted: var(--color-grey-600); // D-07, D-12
+
+  // Placeholder y subtítulo: 4,5:1 sobre blanco y crema. El #817781 del Figma daba 4,0:1 sobre
+  // crema, y el azul grisáceo del subtítulo, 4,25:1 sobre blanco (D-07, D-12).
+  --color-text-muted: var(--color-grey-600);
   --color-text-muted-hover: var(--color-grey-700);
   --color-on-media: var(--color-white); // texto sobre la imagen del hero
 
