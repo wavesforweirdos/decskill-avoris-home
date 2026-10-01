@@ -1,0 +1,31 @@
+name: Error
+description: Algo no se ve o no funciona como en el diseño
+labels: [bug]
+body:
+  - type: textarea
+    id: que-pasa
+    attributes:
+      label: Qué ocurre
+    validations:
+      required: true
+  - type: textarea
+    id: pasos
+    attributes:
+      label: Pasos para reproducirlo
+      placeholder: |
+        1. Abrir la home a 744 px de ancho
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Comportamiento esperado
+      description: Indica también la referencia en Figma si la hay.
+    validations:
+      required: true
+  - type: input
+    id: entorno
+    attributes:
+      label: Navegador y ancho de pantalla
+      placeholder: Firefox 130, 390 px
