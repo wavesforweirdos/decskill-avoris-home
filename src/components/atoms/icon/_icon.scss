@@ -1,0 +1,74 @@
+// Icono SVG pintado con una máscara: el color sale de currentcolor (y por tanto de los tokens) sin
+// modificar el SVG exportado del Figma (D-17). Siempre es decorativo: va con aria-hidden y, si es
+// lo único que lleva un botón, el botón lleva aria-label.
+.icon {
+  --icon-size: var(--size-icon-md);
+
+  display: inline-block;
+  flex: none;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  background-color: currentcolor;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+
+  // En el modo de alto contraste de Windows se sustituyen los fondos y la máscara quedaría vacía.
+  @media (forced-colors: active) {
+    background-color: canvastext;
+  }
+}
+
+.icon--sm {
+  --icon-size: var(--size-icon-sm);
+}
+
+.icon--lg {
+  --icon-size: var(--size-icon-lg);
+}
+
+.icon--chevron-down {
+  mask-image: url('../../../assets/icons/chevron-down.svg');
+}
+
+.icon--chevron-left {
+  mask-image: url('../../../assets/icons/chevron-left.svg');
+}
+
+.icon--chevron-right {
+  mask-image: url('../../../assets/icons/chevron-right.svg');
+}
+
+.icon--close {
+  mask-image: url('../../../assets/icons/close.svg');
+}
+
+// El Figma dibuja este icono a 17,3 px dentro de una caja de 24: el 72 %.
+.icon--filters {
+  mask-image: url('../../../assets/icons/filters.svg');
+  mask-size: 72%;
+}
+
+.icon--home {
+  mask-image: url('../../../assets/icons/home.svg');
+}
+
+.icon--menu {
+  mask-image: url('../../../assets/icons/menu.svg');
+}
+
+.icon--mountains {
+  mask-image: url('../../../assets/icons/mountains.svg');
+}
+
+.icon--price {
+  mask-image: url('../../../assets/icons/price.svg');
+}
+
+.icon--tooltip {
+  mask-image: url('../../../assets/icons/tooltip.svg');
+}
+
+.icon--world {
+  mask-image: url('../../../assets/icons/world.svg');
+}

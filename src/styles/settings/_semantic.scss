@@ -1,0 +1,187 @@
+@use '../tools' as *;
+
+// TOKENS SEMÁNTICOS. Regla primitivos → semánticos:
+// los primitivos (_primitives.scss) son la paleta cruda del Figma y nunca los usa un componente.
+// Los semánticos de este archivo expresan intención (--color-primary, --space-section,
+// --text-button…) y son lo ÚNICO que consumen los componentes.
+// Por qué dos niveles: si un componente usara --color-purple-600, cambiar de marca obligaría a
+// tocar cada componente. Con --color-primary solo se reasigna el semántico, una vez, en brands/.
+// Los colores son los que cambian por marca y por eso viven en brands/_default.scss; aquí están
+// el resto de familias (espaciado, tamaños, radios, sombras y tipografía).
+
+:root {
+  // Espaciado: escala general y valores por intención. Los de 10 y 14 px son los que dibuja el
+  // Figma en controles, que la escala no cubre (ver D-24).
+  --space-3xs: var(--space-2);
+  --space-2xs: var(--space-4);
+  --space-xs: var(--space-6);
+  --space-sm: var(--space-8);
+  --space-md: var(--space-12);
+  --space-lg: var(--space-16);
+  --space-xl: var(--space-24);
+  --space-2xl: var(--space-32);
+  --space-3xl: var(--space-48);
+  --space-control-gap: var(--space-10);
+  --space-control-x-sm: var(--space-24);
+  --space-control-x-base: var(--space-40);
+  --space-control-x-lg: var(--space-48);
+  --space-toggle-x: var(--space-14);
+  --space-tooltip-x: var(--space-10);
+
+  // Espaciado de página: cambia con el breakpoint (valores de la home en el Figma).
+  --space-gutter: var(--space-16);
+  --space-section: var(--space-56);
+  --space-section-header: var(--space-40);
+
+  // Tamaños
+  --size-icon-sm: var(--size-16);
+  --size-icon-md: var(--size-24);
+  --size-icon-lg: var(--size-32);
+  --size-control-sm: var(--size-40);
+  --size-control-base: var(--size-48);
+  --size-control-lg: var(--size-56);
+  --size-target-min: var(--size-24); // WCAG 2.5.8: objetivo táctil mínimo
+  --size-dot: var(--size-10);
+  --size-checkbox-box: var(--size-18);
+
+  // Línea
+  --border-width: var(--border-width-1);
+  --border-width-strong: var(--border-width-2);
+
+  // Radios
+  --radius-control: var(--radius-208);
+  --radius-tag: var(--radius-208);
+  --radius-card: var(--radius-24);
+  --radius-checkbox: var(--radius-2);
+  --radius-slider-control: var(--radius-2);
+  --radius-tooltip: var(--radius-4);
+
+  // Sombras
+  --shadow-raised: var(--shadow-100);
+  --shadow-raised-hover: var(--shadow-200);
+
+  // Capas
+  --z-tooltip: 1;
+
+  // Tipografía: familias y roles. Cada rol es el atajo `font` (peso, tamaño/interlineado, familia),
+  // se usa con `font: var(--text-button)`. Ver D-06: solo Syne (títulos) y Nunito (todo lo demás).
+  --font-heading: var(--font-family-syne);
+  --font-body: var(--font-family-nunito);
+  --text-body: var(--font-weight-400) var(--font-size-16) / var(--line-height-24) var(--font-body);
+  --text-group-title: var(--font-weight-600) var(--font-size-22) / var(--line-height-24)
+    var(--font-heading);
+  --text-panel-title: var(--font-weight-700) var(--font-size-18) / var(--line-height-24)
+    var(--font-heading);
+  --text-card-city: var(--font-weight-700) var(--font-size-14) / var(--line-height-18)
+    var(--font-heading);
+  --text-card-days: var(--font-weight-500) var(--font-size-14) / var(--line-height-18)
+    var(--font-heading);
+  --text-card-title: var(--font-weight-700) var(--font-size-18) / var(--line-height-22)
+    var(--font-body);
+  --text-price: var(--font-weight-700) var(--font-size-22) / var(--line-height-24) var(--font-body);
+  --text-caption: var(--font-weight-500) var(--font-size-12) / var(--line-height-16)
+    var(--font-body);
+  --text-badge: var(--font-weight-800) var(--font-size-12) / var(--line-height-16) var(--font-body);
+  --text-button: var(--font-weight-600) var(--font-size-16) / var(--line-height-24) var(--font-body);
+  --text-button-lg: var(--font-weight-600) var(--font-size-20) / var(--line-height-24)
+    var(--font-body);
+  --text-nav: var(--font-weight-600) var(--font-size-16) / var(--line-height-20) var(--font-body);
+  --text-nav-active: var(--font-weight-700) var(--font-size-16) / var(--line-height-20)
+    var(--font-body);
+  --text-control: var(--font-weight-600) var(--font-size-14) / var(--line-height-20)
+    var(--font-body);
+  --text-control-strong: var(--font-weight-700) var(--font-size-14) / var(--line-height-20)
+    var(--font-body);
+  --text-link: var(--font-weight-600) var(--font-size-14) / var(--line-height-16) var(--font-body);
+  --text-tooltip: var(--font-weight-500) var(--font-size-14) / var(--line-height-16)
+    var(--font-body);
+  --text-legal: var(--font-weight-700) var(--font-size-14) / var(--line-height-20) var(--font-body);
+  --text-field-value: var(--font-weight-500) var(--font-size-14) / var(--line-height-20)
+    var(--font-body);
+}
+
+@include mq(tablet-small) {
+  :root {
+    --space-gutter: var(--space-24);
+    --space-section-header: var(--space-48);
+  }
+}
+
+@include mq(desktop) {
+  :root {
+    --space-section: var(--space-72);
+    --space-section-header: var(--space-72);
+  }
+}
+
+// Roles tipográficos fluidos: tamaño e interlineado (px) a 390, 744, 1024 y 1280 px de ancho.
+// Entre dos puntos el valor se interpola (tools/_fluid.scss). Salen del CSS de Figma de la home;
+// el hero no es monótono (en móvil el título es mayor que en desktop) y se respeta tal cual.
+@include fluid-text-tokens(
+  (
+    'hero-title': (
+      'weight': 700,
+      'family': var(--font-heading),
+      'sizes': (
+        32,
+        34,
+        34,
+        30,
+      ),
+      'lines': (
+        36,
+        38,
+        38,
+        34,
+      ),
+    ),
+    'hero-subtitle': (
+      'weight': 500,
+      'family': var(--font-body),
+      'sizes': (
+        24,
+        24,
+        24,
+        20,
+      ),
+      'lines': (
+        28,
+        30,
+        30,
+        26,
+      ),
+    ),
+    'section-title': (
+      'weight': 700,
+      'family': var(--font-heading),
+      'sizes': (
+        30,
+        32,
+        34,
+        38,
+      ),
+      'lines': (
+        32,
+        34,
+        36,
+        40,
+      ),
+    ),
+    'section-subtitle': (
+      'weight': 400,
+      'family': var(--font-body),
+      'sizes': (
+        20,
+        20,
+        22,
+        22,
+      ),
+      'lines': (
+        24,
+        24,
+        26,
+        26,
+      ),
+    ),
+  )
+);

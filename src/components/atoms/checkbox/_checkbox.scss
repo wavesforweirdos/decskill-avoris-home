@@ -1,0 +1,66 @@
+// Checkbox nativo (conserva teclado, formularios y lectores de pantalla) con apariencia propia.
+// El input mide 24 px, que es el área de pulsación; la caja dibujada es de 18 px (Figma).
+// La etiqueta va aparte, en la molécula que lo use.
+.checkbox {
+  appearance: none;
+  display: inline-grid;
+  flex: none;
+  place-content: center;
+  width: var(--size-icon-md);
+  height: var(--size-icon-md);
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+
+  // Caja
+  &::before {
+    content: '';
+    grid-area: 1 / 1;
+    width: var(--size-checkbox-box);
+    height: var(--size-checkbox-box);
+    border: var(--border-width) solid var(--color-primary);
+    border-radius: var(--radius-checkbox);
+    background-color: var(--color-surface);
+  }
+
+  // Marca de verificación, oculta mientras no está marcado.
+  &::after {
+    content: '';
+    grid-area: 1 / 1;
+    width: var(--size-icon-sm);
+    height: var(--size-icon-sm);
+    background-color: var(--color-primary);
+    mask-image: url('../../../assets/icons/check.svg');
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    visibility: hidden;
+  }
+
+  &:checked::before {
+    background-color: var(--color-accent);
+  }
+
+  &:checked::after {
+    visibility: visible;
+  }
+
+  &:hover::before {
+    border-color: var(--color-primary-hover);
+  }
+
+  &:checked:hover::before {
+    background-color: var(--color-accent-hover);
+  }
+
+  &:hover::after {
+    background-color: var(--color-primary-hover);
+  }
+
+  // Alto contraste de Windows: los fondos se sustituyen y la máscara de la marca quedaría vacía.
+  @media (forced-colors: active) {
+    &::after {
+      background-color: canvastext;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+@use 'sass:map';
+@use 'sass:math';
+@use '../settings/breakpoints';
+
+// Media query mobile-first: @include mq(tablet-small) { … }
+// Se escribe en em (no en px) para que el breakpoint también reaccione al tamaño de texto del usuario.
+@mixin mq($name) {
+  $width: map.get(breakpoints.$breakpoints, $name);
+
+  @if not $width {
+    @error 'Breakpoint desconocido: #{$name}';
+  }
+
+  @media (min-width: #{math.div($width, 16px)}em) {
+    @content;
+  }
+}

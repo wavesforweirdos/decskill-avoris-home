@@ -1,0 +1,13 @@
+// Lista de componentes en orden atoms → molecules → organisms.
+// Se escribe a mano para que el orden del CSS sea explícito.
+@use 'atoms/icon/icon';
+@use 'atoms/logo/logo';
+@use 'atoms/button/button';
+@use 'atoms/heading/heading';
+@use 'atoms/tag/tag';
+@use 'atoms/checkbox/checkbox';
+@use 'atoms/text-input/text-input';
+@use 'atoms/filter-toggle/filter-toggle';
+@use 'atoms/slider-control/slider-control';
+@use 'atoms/slider-dot/slider-dot';
+@use 'atoms/info-tooltip/info-tooltip';

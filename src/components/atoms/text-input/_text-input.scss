@@ -1,0 +1,60 @@
+// Campo de texto pill con icono. La etiqueta existe pero va oculta (u-visually-hidden), porque el
+// layout de la home dibuja solo el placeholder, sin etiqueta visible (D-25). Un placeholder no
+// sustituye a una etiqueta para lectores de pantalla.
+.text-input {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  min-height: var(--size-control-base);
+
+  // El trazo va dentro de la caja en el Figma, por eso se resta del padding.
+  padding-inline: calc(var(--space-lg) - var(--border-width))
+    calc(var(--space-md) - var(--border-width));
+  border: var(--border-width) solid var(--color-primary);
+  border-radius: var(--radius-control);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+
+  &:hover {
+    border-color: var(--color-primary-hover);
+  }
+
+  // Foco: el Figma dibuja un borde de 2 px. Se consigue con una sombra interior de 1 px para no
+  // mover el layout.
+  &:focus-within {
+    box-shadow: inset 0 0 0 var(--border-width) var(--color-primary);
+  }
+
+  &:hover:focus-within {
+    box-shadow: inset 0 0 0 var(--border-width) var(--color-primary-hover);
+  }
+}
+
+.text-input__icon {
+  color: var(--color-primary);
+}
+
+.text-input__field {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: var(--text-field-value);
+
+  &::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  // El indicador de foco lo dibuja el contenedor. Un contorno transparente se hace visible solo
+  // en el modo de alto contraste de Windows, donde la sombra del contenedor desaparece.
+  &:focus-visible {
+    outline-color: transparent;
+    box-shadow: none;
+  }
+}
+
+.text-input:hover .text-input__field::placeholder {
+  color: var(--color-text-muted-hover);
+}

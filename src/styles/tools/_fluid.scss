@@ -1,0 +1,73 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:math';
+@use '../settings/breakpoints';
+@use 'mq' as *;
+@use 'rem' as *;
+
+// Interpolación lineal entre dos valores (en px) a medida que el viewport pasa de
+// $from-width a $to-width. clamp() la detiene en los extremos, así el texto nunca se sale del rango
+// dibujado en el Figma. Mínimo y máximo van en rem y la pendiente en vw: el zoom y la preferencia
+// de texto del usuario siguen funcionando.
+@function fluid($from, $to, $from-width, $to-width) {
+  @if $from == $to {
+    @return rem($from);
+  }
+
+  $low: math.min($from, $to);
+  $high: math.max($from, $to);
+  $slope: math.div($to - $from, $to-width - $from-width);
+
+  @return clamp(
+    #{rem($low)},
+    calc(#{rem($from)} + #{$slope} * (100vw - #{$from-width * 1px})),
+    #{rem($high)}
+  );
+}
+
+// Valor de la propiedad `font` de un rol para el tramo $index de sus puntos.
+// Entre el punto $index y el siguiente interpola; el último punto es constante.
+@function text-segment($role, $index, $widths) {
+  $sizes: map.get($role, 'sizes');
+  $lines: map.get($role, 'lines');
+  $last: list.length($widths);
+  $size: rem(list.nth($sizes, $index));
+  $line: rem(list.nth($lines, $index));
+
+  @if $index < $last {
+    $from-width: list.nth($widths, $index);
+    $to-width: list.nth($widths, $index + 1);
+    $size: fluid(list.nth($sizes, $index), list.nth($sizes, $index + 1), $from-width, $to-width);
+    $line: fluid(list.nth($lines, $index), list.nth($lines, $index + 1), $from-width, $to-width);
+  }
+
+  @return '#{map.get($role, "weight")} #{$size}/#{$line} #{map.get($role, "family")}';
+}
+
+// Emite en :root un token --text-<rol> por cada rol fluido. Hay un tramo por breakpoint, cada uno
+// redefine el token para que el siguiente empiece justo donde acaba el anterior.
+// $roles: (nombre: (weight, family, sizes, lines)), con sizes y lines en px a 390, 744, 1024 y 1280.
+@mixin fluid-text-tokens($roles) {
+  $widths: (
+    math.div(breakpoints.$mobile-width, 1px),
+    math.div(map.get(breakpoints.$breakpoints, 'tablet-small'), 1px),
+    math.div(map.get(breakpoints.$breakpoints, 'tablet-large'), 1px),
+    math.div(map.get(breakpoints.$breakpoints, 'desktop'), 1px)
+  );
+
+  :root {
+    @each $name, $role in $roles {
+      --text-#{$name}: #{text-segment($role, 1, $widths)};
+    }
+  }
+
+  @each $index, $breakpoint in (2: 'tablet-small', 3: 'tablet-large', 4: 'desktop') {
+    @include mq($breakpoint) {
+      :root {
+        @each $name, $role in $roles {
+          --text-#{$name}: #{text-segment($role, $index, $widths)};
+        }
+      }
+    }
+  }
+}

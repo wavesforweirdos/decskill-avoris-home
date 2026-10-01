@@ -1,0 +1,22 @@
+// Botón "Ver filtros" que abre el panel de filtros por debajo de 1280 px.
+.filter-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-control-gap);
+  min-height: var(--size-control-sm);
+
+  // El trazo va dentro de la caja en el Figma, por eso se resta del padding.
+  padding-inline: calc(var(--space-toggle-x) - var(--border-width));
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-control);
+  background-color: var(--color-surface-alt);
+  color: var(--color-text);
+  font: var(--text-button-lg);
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--color-border-hover);
+    background-color: var(--color-surface-alt-hover);
+    color: var(--color-text-hover);
+  }
+}

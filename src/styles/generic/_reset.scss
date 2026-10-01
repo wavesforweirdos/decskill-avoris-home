@@ -1,0 +1,59 @@
+// Reset moderno: parte de los estilos del navegador y solo corrige lo que estorba.
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+// Solo las listas con clase pierden viñetas. Las listas con list-style: none y sin role="list"
+// dejan de anunciarse como lista en VoiceOver (Safari).
+ul[class],
+ol[class] {
+  padding: 0;
+  list-style: none;
+}
+
+// Un display de autor (flex, grid…) gana al atributo hidden del navegador; esto lo devuelve.
+[hidden]:not([hidden='until-found']) {
+  display: none;
+}

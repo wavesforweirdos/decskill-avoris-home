@@ -1,0 +1,10 @@
+// Etiqueta naranja de las cards ("Quads"). La variante gris de la hoja de tags no aparece en la home.
+.tag {
+  display: inline-block;
+  padding-block: var(--space-2xs);
+  padding-inline: var(--space-md);
+  border-radius: var(--radius-tag);
+  background-color: var(--color-accent);
+  color: var(--color-text);
+  font: var(--text-badge);
+}

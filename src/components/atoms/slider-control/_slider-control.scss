@@ -1,0 +1,31 @@
+// Flecha anterior/siguiente del carrusel del hero. Solo lleva icono, así que el botón lleva aria-label.
+.slider-control {
+  // D-20: el Figma usa el morado al 32 %, que da 1,80:1 con el icono blanco. Con el 56 % da
+  // 3,05:1, el mínimo para un icono (WCAG 1.4.11). La mezcla es con la superficie y no una
+  // transparencia, así el contraste no depende de la imagen que haya detrás.
+  --slider-control-mix: 56%;
+
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-control-sm);
+  height: var(--size-control-sm);
+  padding: 0;
+
+  // Borde transparente: solo se hace visible en el modo de alto contraste, donde el fondo
+  // desaparece y la flecha se quedaría sin caja.
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-slider-control);
+  background-color: color-mix(
+    in srgb,
+    var(--color-primary) var(--slider-control-mix),
+    var(--color-surface)
+  );
+  color: var(--color-on-primary);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-primary);
+  }
+}

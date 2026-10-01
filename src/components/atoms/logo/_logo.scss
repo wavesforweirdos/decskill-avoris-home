@@ -1,0 +1,12 @@
+// Los atributos width y height del <img> reservan el espacio antes de cargar; aquí solo se fija
+// la altura y el ancho sale de la proporción.
+.logo {
+  display: block;
+  width: auto;
+  height: var(--size-icon-lg);
+}
+
+// Versión del navbar móvil.
+.logo--compact {
+  height: var(--size-icon-md);
+}
