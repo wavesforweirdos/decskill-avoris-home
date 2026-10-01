@@ -1,0 +1,100 @@
+// Botón pill con tres variantes (primary, secondary, accent) y tres tamaños (sm, base, lg).
+// Cada variante solo reasigna las propiedades locales --button-*; la forma es común.
+.button {
+  --button-padding-x: var(--space-control-x-base);
+  --button-min-height: var(--size-control-base);
+  --button-font: var(--text-button);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-control-gap);
+  min-height: var(--button-min-height);
+
+  // El borde (transparente en primary y accent) hace que todas las variantes midan lo mismo; se
+  // resta del padding porque en el Figma el trazo va dentro de la caja.
+  padding-inline: calc(var(--button-padding-x) - var(--border-width));
+  border: var(--border-width) solid var(--button-border);
+  border-radius: var(--radius-control);
+  background-color: var(--button-bg);
+  color: var(--button-fg);
+  font: var(--button-font);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+
+  // :active = hover + un píxel hacia abajo, sin transición (D-19).
+  &:active {
+    transform: translateY(var(--border-width));
+  }
+}
+
+.button--sm {
+  --button-padding-x: var(--space-control-x-sm);
+  --button-min-height: var(--size-control-sm);
+}
+
+.button--lg {
+  --button-padding-x: var(--space-control-x-lg);
+  --button-min-height: var(--size-control-lg);
+  --button-font: var(--text-button-lg);
+}
+
+.button--block {
+  display: flex;
+  width: 100%;
+}
+
+.button--primary {
+  --button-bg: var(--color-primary);
+  --button-fg: var(--color-on-primary);
+  --button-border: transparent;
+
+  &:is(:hover, :active) {
+    --button-bg: var(--color-primary-hover);
+  }
+}
+
+.button--secondary {
+  --button-bg: var(--color-surface);
+  --button-fg: var(--color-primary);
+  --button-border: var(--color-primary);
+
+  &:is(:hover, :active) {
+    --button-fg: var(--color-primary-hover);
+    --button-border: var(--color-primary-hover);
+  }
+}
+
+// Acento: el botón naranja sobre fondo oscuro (el CTA del hero).
+.button--accent {
+  --button-bg: var(--color-accent);
+  --button-fg: var(--color-on-accent);
+  --button-border: transparent;
+
+  &:is(:hover, :active) {
+    --button-bg: var(--color-accent-hover);
+    --button-fg: var(--color-on-accent-hover);
+  }
+}
+
+// Deshabilitado. Va después de hover y active para ganarles, con la misma especificidad.
+.button:is(:disabled, [aria-disabled='true']) {
+  transform: none;
+  cursor: not-allowed;
+}
+
+.button--primary:is(:disabled, [aria-disabled='true']) {
+  --button-bg: var(--color-disabled);
+  --button-fg: var(--color-disabled-text);
+}
+
+.button--secondary:is(:disabled, [aria-disabled='true']) {
+  --button-fg: var(--color-disabled-text);
+  --button-border: var(--color-disabled-strong);
+}
+
+.button--accent:is(:disabled, [aria-disabled='true']) {
+  --button-bg: var(--color-disabled-strong);
+  --button-fg: var(--color-on-accent-disabled);
+}
