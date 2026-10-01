@@ -12,3 +12,10 @@ html {
 :focus-visible {
   @include focus-ring;
 }
+
+// Destino del skip link: se enfoca por código, no es interactivo y un anillo alrededor de toda la
+// página no ayuda a nadie (WCAG 2.4.7 se refiere a elementos operables con teclado).
+[tabindex='-1']:focus-visible {
+  outline: none;
+  box-shadow: none;
+}

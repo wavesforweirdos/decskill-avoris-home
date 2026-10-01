@@ -1,0 +1,157 @@
+@use 'styles/settings/brand' as *;
+@use 'styles/tools' as *;
+
+// Navbar. Flex con justify-content: space-between: logo a la izquierda, pestañas en el hueco y
+// "Reserva" a la derecha (desde 1024, con .header__menu en display: contents para que sean hijos
+// directos del flex). Por debajo de 1024 la navegación pasa a una columna bajo la barra.
+// Mejora progresiva con @media (scripting: enabled): solo si hay JavaScript el menú se pliega,
+// aparece el botón y el panel abierto flota sobre la página sin desplazarla, desde el primer
+// pintado y sin saltos. Sin JavaScript (o en navegadores que no
+// conocen la media query, como Safari < 17) la navegación se queda visible en flujo (D-34).
+.header {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--size-navbar);
+
+  // En móvil la caja del Figma es 12 + 32 + 12 con el borde dibujado encima: se resta del padding
+  // inferior para medir 56 px. Desde 744 el alto lo da min-height.
+  padding-block: var(--space-md) calc(var(--space-md) - var(--border-width));
+  padding-inline: var(--space-navbar-x);
+  border-block-end: var(--border-width) solid $navbar-border-default;
+  background-color: $navbar-background-default;
+
+  @include mq(tablet-small) {
+    padding-block: 0;
+  }
+
+  @include mq(tablet-large) {
+    flex-wrap: nowrap;
+  }
+}
+
+// Desde 744 la barra no tiene padding vertical: la fila del logo y el botón mide lo que la barra
+// (sin su borde) para que, con el menú desplegado debajo, el logo conserve su espacio.
+.header__brand,
+.header__toggle {
+  @include mq(tablet-small) {
+    align-items: center;
+    min-height: calc(var(--size-navbar) - var(--border-width));
+  }
+}
+
+.header__brand {
+  @include mq(tablet-small) {
+    display: flex;
+  }
+}
+
+// El logo mide 24 px en móvil y 32 desde 744 (el .logo base ya mide 32).
+.header__logo {
+  height: var(--size-icon-md);
+
+  @include mq(tablet-small) {
+    height: var(--size-icon-lg);
+  }
+}
+
+// Botón de menú (burger). Oculto por defecto: sin JavaScript no tendría función.
+.header__toggle {
+  display: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: $navbar-menu-icon-default;
+  cursor: pointer;
+
+  &:hover {
+    color: $navbar-menu-icon-hover;
+  }
+}
+
+// Menú: en columna y, sin JavaScript, en flujo bajo la barra. El estado abierto no está en el Figma;
+// se ha hecho lo mínimo funcional con las pestañas y el botón existentes (D-33).
+.header__menu {
+  display: flex;
+  flex: 0 0 calc(100% + 2 * var(--space-navbar-x));
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-sm);
+  margin-inline: calc(-1 * var(--space-navbar-x));
+  padding-block: var(--space-lg);
+}
+
+// En el menú apilado las pestañas ocupan todo el ancho de la pantalla y su texto se alinea con el
+// logo; el botón "Reserva" ocupa el ancho entre los márgenes de la barra.
+.header__tab-link {
+  flex: 1;
+  padding-inline: var(--space-navbar-x);
+}
+
+.header__cta {
+  margin-inline: var(--space-navbar-x);
+}
+
+.header__tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.header__tab {
+  display: flex;
+}
+
+@include mq-below(tablet-large) {
+  @media (scripting: enabled) {
+    .header__toggle {
+      display: inline-flex;
+    }
+
+    .header:not([data-menu='open']) .header__menu {
+      display: none;
+    }
+
+    // Abierto: flota justo debajo de la barra, a todo el ancho, con el mismo fondo y la misma línea
+    // inferior que ella, y no empuja el contenido.
+    .header__menu {
+      position: absolute;
+      z-index: var(--z-menu);
+      inset-block-start: calc(100% + var(--border-width));
+      inset-inline: 0;
+      margin-inline: 0;
+      border-block-end: var(--border-width) solid $navbar-border-default;
+      background-color: $navbar-background-default;
+    }
+  }
+}
+
+@include mq(tablet-large) {
+  .header__toggle {
+    display: none;
+  }
+
+  // Solo este div usa display: contents; nav, ul y button conservan su caja y su semántica.
+  .header__menu {
+    display: contents;
+  }
+
+  .header__nav {
+    align-self: stretch;
+  }
+
+  .header__tab-link {
+    padding-inline: var(--space-tab-x);
+  }
+
+  .header__cta {
+    margin-inline: 0;
+  }
+
+  .header__tabs {
+    flex-direction: row;
+    gap: var(--space-navbar-tabs);
+    height: 100%;
+  }
+}
