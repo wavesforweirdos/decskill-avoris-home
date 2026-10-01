@@ -1,2 +1,7 @@
-// Punto de entrada de los estilos. Las capas ITCSS se añaden aquí, de menos a más específica:
-// settings → tools → generic → elements → (componentes) → utilities.
+// Punto de entrada de los estilos, de menos a más específico (ITCSS):
+// settings (tokens) → generic (reset, fuentes) → elements (etiquetas) → components → utilities.
+@use 'styles/settings';
+@use 'styles/generic';
+@use 'styles/elements';
+@use '../components';
+@use 'styles/utilities';
