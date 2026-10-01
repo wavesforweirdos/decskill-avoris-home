@@ -1,0 +1,54 @@
+// Icono de información con tooltip. Se muestra con hover y con foco por CSS; así funciona también
+// sin JavaScript. info-tooltip.ts añade el cierre con Escape.
+.info-tooltip {
+  position: relative;
+  display: inline-flex;
+}
+
+// El icono dibujado es de 16 px, pero el botón mide 24×24 (WCAG 2.5.8). El margen negativo
+// compensa los 4 px de cada lado para que el layout siga siendo el del Figma.
+.info-tooltip__trigger {
+  display: inline-grid;
+  place-items: center;
+  width: var(--size-target-min);
+  height: var(--size-target-min);
+  margin-inline: calc((var(--size-icon-sm) - var(--size-target-min)) / 2);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+// Va encima del icono. El triángulo (::after) cubre el hueco entre ambos, así el puntero puede
+// pasar de uno a otro sin que el tooltip se cierre (WCAG 1.4.13).
+.info-tooltip__bubble {
+  position: absolute;
+  bottom: calc(100% + var(--space-3xs));
+  left: 50%;
+  z-index: var(--z-tooltip);
+  padding-block: var(--space-xs);
+  padding-inline: var(--space-tooltip-x);
+  translate: -50% 0;
+  border-radius: var(--radius-tooltip);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-raised);
+  color: var(--color-text);
+  font: var(--text-tooltip);
+  white-space: nowrap;
+  visibility: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    translate: -50% 0;
+    border-inline: calc(var(--space-xl) / 2) solid transparent;
+    border-top: var(--space-xs) solid var(--color-surface);
+  }
+}
+
+.info-tooltip:is(:hover, :focus-within):not([data-dismissed]) .info-tooltip__bubble {
+  visibility: visible;
+}
