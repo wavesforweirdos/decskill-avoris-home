@@ -60,6 +60,12 @@ El menú de navegación por debajo de 1024 px usa `@media (scripting: enabled)` 
 | Iconos SVG como máscara CSS          | El color sale de `currentcolor` (de los tokens), los SVG del Figma no se tocan y se ven en alto contraste                                                             | `<img>` por icono, SVG en línea, sprite  |
 | Tipografía fluida con `clamp()`      | Título y subtítulo interpolan entre los tamaños del Figma de cada breakpoint en lugar de saltar                                                                       | Solo cambios por media query             |
 
+## Imágenes y carrusel del hero
+
+La foto del hero se sirve en WebP (todos los navegadores objetivo lo soportan), sin PNG de respaldo: `hero-1440.webp` y `hero-2880.webp` (1x y 2x) para anchos desde 744 px, y `hero-mobile-744.webp` y `hero-mobile-1488.webp` por debajo, con el recorte de la parte izquierda que enseña el diseño. Así un móvil descarga unos 20 KB (47 KB en pantallas 2x) en lugar de los 800 KB del PNG original. La primera imagen se pide con `fetchpriority="high"` por ser la candidata a LCP y reserva su espacio con `width` y `height`.
+
+El carrusel funciona sin JavaScript (pista con `scroll-snap`) y `hero.ts` añade las flechas, el indicador y el anuncio de la posición. No hay avance automático.
+
 ## Sistema de diseño y multimarca
 
 Los colores siguen los tres niveles de la página Brand del Figma, como variables de Sass dentro de una carpeta, `src/styles/settings/brand/`, con un archivo por nivel (`_global.scss`, `_semantic.scss`) y uno por componente en `components/` (`_button.scss`, `_tag.scss`…). Cada nivel solo usa los anteriores, y un componente solo usa el último:
