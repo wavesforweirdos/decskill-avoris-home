@@ -52,6 +52,7 @@
 
   &:is(:hover, :active) {
     --button-bg: var(--color-primary-hover);
+    --button-fg: var(--color-on-primary-hover);
   }
 }
 
@@ -61,6 +62,7 @@
   --button-border: var(--color-primary);
 
   &:is(:hover, :active) {
+    --button-bg: var(--color-surface-hover);
     --button-fg: var(--color-primary-hover);
     --button-border: var(--color-primary-hover);
   }
