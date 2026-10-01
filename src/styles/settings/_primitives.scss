@@ -1,39 +1,11 @@
 @use '../tools' as *;
 
-// Paleta cruda del Figma: valores sin intención asociada. NO se usan en componentes, solo desde
-// settings/. Los componentes consumen los semánticos (_semantic.scss y brands/), y Stylelint lo
-// hace cumplir (stylelint.config.js). Los colores llevan los nombres de la página Brand del Figma
-// (basic, primary, secondary): --color-primary-700 es color/brand/primary/700. El resto de
-// números son los del diseño: 24 son 24 px, y así.
+// Valores crudos del Figma que no dependen de la marca: espaciado, tamaños, radios, sombras y
+// tipografía. NO se usan en componentes, solo desde settings/: los componentes consumen los
+// semánticos de _semantic.scss, y Stylelint lo hace cumplir (stylelint.config.js). Los números son
+// los del diseño: 24 son 24 px, y así. Los colores, que sí cambian por marca, viven aparte en
+// brand/.
 :root {
-  // Color. Los dos pasos que no existen en Brand (basic-550 y secondary-650) son ajustes de
-  // contraste y están marcados.
-  --color-basic-000-white: #fff;
-  --color-basic-050: #f8f7f8;
-  --color-basic-100: #e0d9e0;
-  --color-basic-200: #d1c7d1;
-  --color-basic-400: #a0989f;
-  --color-basic-500: #817781;
-  --color-basic-550: #786f78; // ajuste de basic-500 para texto (D-07, D-12)
-  --color-basic-600: #635a63;
-  --color-basic-700: #494149;
-  --color-basic-800: #342e34;
-  --color-basic-900: #2d242d;
-  --color-primary-700: #622f60;
-  --color-primary-800: #471f45;
-  --color-secondary-050: #fbf6f4;
-  --color-secondary-100: #f4e8e1;
-  --color-secondary-400: #ff8f50;
-  --color-secondary-500: #d67843;
-  --color-secondary-650: #b25927; // ajuste de secondary-600 (#b85c28) para texto (D-02)
-  --color-secondary-800: #4e250e;
-  --color-secondary-900: #31190c;
-
-  // Colores con alpha de Brand (el alpha va en el propio valor, como en las variables del Figma).
-  --color-basic-000-white-high-alpha: #ffffffb8; // blanco al 72 %
-  --color-basic-medium-alpha: #81778180; // basic-500 al 50 %
-  --color-primary-low-alpha: #622f6052; // primary-700 al 32 %
-
   // Espaciado
   --space-2: #{rem(2)};
   --space-4: #{rem(4)};

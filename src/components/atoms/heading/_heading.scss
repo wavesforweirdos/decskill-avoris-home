@@ -1,25 +1,27 @@
+@use 'styles/settings/brand' as *;
+
 // El nivel (h1…h6) lo decide quien usa el partial según la jerarquía de la página; la variante
 // decide solo el aspecto. Syne para todos los títulos (D-06).
-.heading {
-  color: var(--color-text);
-}
 
 // Título del hero, sobre la imagen.
 .heading--hero {
-  color: var(--color-on-media);
+  color: $hero-title-default;
   font: var(--text-hero-title);
 }
 
 .heading--section {
+  color: $section-title-default;
   font: var(--text-section-title);
 }
 
 // Título de cada grupo de cards ("Asia").
 .heading--group {
+  color: $circuit-card-grid-title-default;
   font: var(--text-group-title);
 }
 
 // Título del panel de filtros y del popover de precios.
 .heading--panel {
+  color: $filters-section-title-default;
   font: var(--text-panel-title);
 }

@@ -1,3 +1,5 @@
+@use 'styles/settings/brand' as *;
+
 // Checkbox nativo (conserva teclado, formularios y lectores de pantalla) con apariencia propia.
 // El input mide 24 px, que es el área de pulsación; la caja dibujada es de 18 px (Figma).
 // La etiqueta va aparte, en la molécula que lo use.
@@ -12,15 +14,30 @@
   background: transparent;
   cursor: pointer;
 
-  // Caja
+  // Caja. Los estados van de menos a más específico: reposo, hover, marcado y marcado con hover.
   &::before {
     content: '';
     grid-area: 1 / 1;
     width: var(--size-checkbox-box);
     height: var(--size-checkbox-box);
-    border: var(--border-width) solid var(--color-primary);
+    border: var(--border-width) solid $form-checkbox-box-border-default;
     border-radius: var(--radius-checkbox);
-    background-color: var(--color-surface);
+    background-color: $form-checkbox-box-background-default;
+  }
+
+  &:hover::before {
+    border-color: $form-checkbox-box-border-hover;
+    background-color: $form-checkbox-box-background-hover;
+  }
+
+  &:checked::before {
+    border-color: $form-checkbox-box-border-selected;
+    background-color: $form-checkbox-box-background-selected;
+  }
+
+  &:checked:hover::before {
+    border-color: $form-checkbox-box-border-selected-hover;
+    background-color: $form-checkbox-box-background-selected-hover;
   }
 
   // Marca de verificación, oculta mientras no está marcado.
@@ -29,7 +46,7 @@
     grid-area: 1 / 1;
     width: var(--size-icon-sm);
     height: var(--size-icon-sm);
-    background-color: var(--color-primary);
+    background-color: $form-checkbox-check-icon-default;
     mask-image: url('../../../assets/icons/check.svg');
     mask-position: center;
     mask-repeat: no-repeat;
@@ -37,24 +54,12 @@
     visibility: hidden;
   }
 
-  &:checked::before {
-    background-color: var(--color-accent);
-  }
-
   &:checked::after {
     visibility: visible;
   }
 
-  &:hover::before {
-    border-color: var(--color-primary-hover);
-  }
-
-  &:checked:hover::before {
-    background-color: var(--color-accent-hover);
-  }
-
   &:hover::after {
-    background-color: var(--color-primary-hover);
+    background-color: $form-checkbox-check-icon-hover;
   }
 
   // Alto contraste de Windows: los fondos se sustituyen y la máscara de la marca quedaría vacía.

@@ -1,8 +1,9 @@
 @use '../tools' as *;
+@use '../settings/brand' as *;
 
 html {
-  background-color: var(--color-surface);
-  color: var(--color-text);
+  background-color: $page-background;
+  color: $page-text;
   font: var(--text-body);
 }
 

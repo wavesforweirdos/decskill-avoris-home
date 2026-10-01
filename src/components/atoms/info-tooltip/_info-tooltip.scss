@@ -1,3 +1,5 @@
+@use 'styles/settings/brand' as *;
+
 // Icono de información con tooltip. Se muestra con hover y con foco por CSS; así funciona también
 // sin JavaScript. info-tooltip.ts añade el cierre con Escape.
 .info-tooltip {
@@ -16,7 +18,7 @@
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--color-text);
+  color: $info-tooltip-icon-default;
   cursor: pointer;
 }
 
@@ -31,9 +33,9 @@
   padding-inline: var(--space-tooltip-x);
   translate: -50% 0;
   border-radius: var(--radius-tooltip);
-  background-color: var(--color-surface);
+  background-color: $overlay-background-default;
   box-shadow: var(--shadow-raised);
-  color: var(--color-text);
+  color: $overlay-text-default;
   font: var(--text-tooltip);
   white-space: nowrap;
   visibility: hidden;
@@ -45,7 +47,7 @@
     left: 50%;
     translate: -50% 0;
     border-inline: calc(var(--space-xl) / 2) solid transparent;
-    border-top: var(--space-xs) solid var(--color-surface);
+    border-top: var(--space-xs) solid $overlay-background-default;
   }
 }
 

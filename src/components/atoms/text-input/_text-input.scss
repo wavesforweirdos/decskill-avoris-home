@@ -1,3 +1,5 @@
+@use 'styles/settings/brand' as *;
+
 // Campo de texto pill con icono. La etiqueta existe pero va oculta (u-visually-hidden), porque el
 // layout de la home dibuja solo el placeholder, sin etiqueta visible (D-25). Un placeholder no
 // sustituye a una etiqueta para lectores de pantalla.
@@ -10,28 +12,32 @@
   // El trazo va dentro de la caja en el Figma, por eso se resta del padding.
   padding-inline: calc(var(--space-lg) - var(--border-width))
     calc(var(--space-md) - var(--border-width));
-  border: var(--border-width) solid var(--color-primary);
+  border: var(--border-width) solid $form-text-input-border-default;
   border-radius: var(--radius-control);
-  background-color: var(--color-surface);
-  color: var(--color-text);
+  background-color: $form-text-input-background-default;
+  color: $form-text-input-text-default;
 
   &:hover {
-    border-color: var(--color-primary-hover);
+    border-color: $form-text-input-border-hover;
   }
 
   // Foco: el Figma dibuja un borde de 2 px. Se consigue con una sombra interior de 1 px para no
   // mover el layout.
   &:focus-within {
-    box-shadow: inset 0 0 0 var(--border-width) var(--color-primary);
+    box-shadow: inset 0 0 0 var(--border-width) $form-text-input-border-focus;
   }
 
   &:hover:focus-within {
-    box-shadow: inset 0 0 0 var(--border-width) var(--color-primary-hover);
+    box-shadow: inset 0 0 0 var(--border-width) $form-text-input-border-focus-hover;
   }
 }
 
 .text-input__icon {
-  color: var(--color-primary);
+  color: $form-text-input-icon-default;
+}
+
+.text-input:hover .text-input__icon {
+  color: $form-text-input-icon-hover;
 }
 
 .text-input__field {
@@ -44,7 +50,7 @@
   font: var(--text-field-value);
 
   &::placeholder {
-    color: var(--color-text-muted);
+    color: $form-text-input-placeholder-default;
   }
 
   // El indicador de foco lo dibuja el contenedor. Un contorno transparente se hace visible solo
@@ -56,5 +62,5 @@
 }
 
 .text-input:hover .text-input__field::placeholder {
-  color: var(--color-text-muted-hover);
+  color: $form-text-input-placeholder-hover;
 }
