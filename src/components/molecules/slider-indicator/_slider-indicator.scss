@@ -1,0 +1,6 @@
+// Fila de puntos del carrusel (46 × 10 px en el Figma: 3 × 10 + 2 × 8). Solo es un indicador visual
+// (D-23): el contenedor lleva aria-hidden y la posición se anuncia con la región aria-live del hero.
+.slider-indicator {
+  display: flex;
+  gap: var(--space-sm);
+}

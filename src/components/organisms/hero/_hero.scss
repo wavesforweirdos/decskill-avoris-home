@@ -1,0 +1,60 @@
+@use 'styles/tools' as *;
+
+// Carrusel del hero. Grid de tres columnas (flecha 40 px, resto, flecha 40 px) y dos filas (la
+// pista y los puntos): las flechas se alinean en los dos ejes (en los laterales y centradas en
+// vertical) y los puntos van bajo el texto. Es el único sitio donde hace falta alinear en ambos
+// ejes a la vez; el contenido de cada diapositiva es Flex (hero-slide).
+// Sin JavaScript la pista ya funciona: scroll-snap horizontal que se desliza con el dedo, la rueda
+// o el teclado (la pista es enfocable). Las flechas y los puntos están ocultos (hidden) hasta que
+// hero.ts los muestra: sus columnas son fijas, así que no desplazan nada.
+.hero {
+  display: grid;
+  grid-template-columns: var(--size-control-sm) 1fr var(--size-control-sm);
+  grid-template-rows: minmax(0, 1fr) auto;
+  height: var(--size-hero);
+}
+
+// La pista ocupa toda la caja, por debajo de las flechas y de los puntos.
+.hero__track {
+  display: flex;
+  grid-area: 1 / 1 / -1 / -1;
+  min-height: 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+
+  // Chrome 120 todavía no conoce scrollbar-width (llega en la 121).
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  // Toca los cuatro bordes de la página: el anillo va por dentro.
+  &:focus-visible {
+    @include focus-ring-inset;
+  }
+}
+
+.hero__control {
+  position: relative;
+  z-index: 1;
+  grid-row: 1 / -1;
+  align-self: center;
+}
+
+.hero__control--prev {
+  grid-column: 1;
+}
+
+.hero__control--next {
+  grid-column: 3;
+}
+
+// Los puntos van a 32 px del borde inferior, bajo el texto.
+.hero__indicator {
+  position: relative;
+  z-index: 1;
+  grid-area: 2 / 2;
+  place-self: end center;
+  padding-block-end: var(--space-2xl);
+}
