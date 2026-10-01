@@ -1,0 +1,14 @@
+// Enlace para saltar al contenido (WCAG 2.4.1). Es el primer elemento enfocable de la página: queda
+// fuera de la vista por arriba y baja al recibir el foco. Reutiliza el botón primary sm, así no
+// añade colores ni medidas propias, y solo se posiciona con inset (con transform chocaría con el
+// :active del botón). Sin transición, por lo que no hay nada que reducir.
+.skip-link {
+  position: absolute;
+  z-index: var(--z-skip-link);
+  inset-block-start: calc(-1 * (var(--size-control-sm) + var(--space-lg)));
+  inset-inline-start: var(--space-sm);
+
+  &:focus {
+    inset-block-start: var(--space-sm);
+  }
+}

@@ -1,0 +1,6 @@
+<a class="nav-tab{{#if current}} nav-tab--current{{/if}}{{#if class}} {{class}}{{/if}}" href="{{href}}"{{#if current}} aria-current="page"{{/if}}>
+  {{#if icon}}
+  {{> atoms/icon/icon name=icon class="nav-tab__icon"}}
+  {{/if}}
+  <span>{{label}}</span>
+</a>

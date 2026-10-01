@@ -25,11 +25,17 @@
   --space-control-x-lg: var(--space-48);
   --space-toggle-x: var(--space-14);
   --space-tooltip-x: var(--space-10);
+  --space-tab-x: var(--space-md);
+  --space-tab-gap: var(--space-xs);
 
   // Espaciado de página: cambia con el breakpoint (valores de la home en el Figma).
   --space-gutter: var(--space-16);
   --space-section: var(--space-56);
   --space-section-header: var(--space-40);
+  --space-navbar-x: var(--space-lg);
+  --space-navbar-tabs: var(--space-lg);
+  --space-footer-x: var(--space-2xl);
+  --space-footer-y: var(--space-3xl);
 
   // Tamaños
   --size-icon-sm: var(--size-16);
@@ -39,6 +45,9 @@
   --size-control-base: var(--size-48);
   --size-control-lg: var(--size-56);
   --size-target-min: var(--size-24); // WCAG 2.5.8: objetivo táctil mínimo
+  --size-navbar: var(--size-56);
+  --size-tab-marker-width: var(--size-18);
+  --size-tab-marker-height: var(--size-12);
   --size-dot: var(--size-10);
   --size-checkbox-box: var(--size-18);
 
@@ -60,6 +69,8 @@
 
   // Capas
   --z-tooltip: 1;
+  --z-menu: 2;
+  --z-skip-link: 3;
 
   // Tipografía: familias y roles. Cada rol es el atajo `font` (peso, tamaño/interlineado, familia),
   // se usa con `font: var(--text-button)`. Ver D-06: solo Syne (títulos) y Nunito (todo lo demás).
@@ -102,6 +113,16 @@
   :root {
     --space-gutter: var(--space-24);
     --space-section-header: var(--space-48);
+    --space-navbar-x: var(--space-xl);
+    --space-footer-x: var(--space-xl);
+    --size-navbar: var(--size-80);
+  }
+}
+
+@include mq(tablet-large) {
+  :root {
+    --space-navbar-x: var(--space-2xl);
+    --space-footer-x: var(--space-40);
   }
 }
 
@@ -109,6 +130,7 @@
   :root {
     --space-section: var(--space-72);
     --space-section-header: var(--space-72);
+    --space-navbar-tabs: var(--space-72);
   }
 }
 

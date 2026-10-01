@@ -42,6 +42,8 @@ Navegadores objetivo: **Chrome 120**, **Safari 16.4** y **Firefox 120**, o poste
 
 `text-wrap: balance` en los títulos es una mejora progresiva: los navegadores que no lo soportan muestran el texto sin equilibrar.
 
+El menú de navegación por debajo de 1024 px usa `@media (scripting: enabled)` para plegarse solo si hay JavaScript. Los navegadores que no conocen esa media query, como Safari anterior a 17, muestran la navegación siempre desplegada: es menos compacta pero funciona igual.
+
 ## Decisiones técnicas
 
 | Decisión                             | Motivo                                                                                                                                                                | Alternativa descartada                   |
@@ -79,3 +81,7 @@ La multimarca es por compilación: cada marca genera su propio CSS a partir del 
 1. Ajustar la paleta de `brand/_global.scss` (los colores globales).
 2. Revisar `brand/_semantic.scss` y `brand/components/` solo si el diseño de esa marca mapea los colores de otra forma.
 3. Compilar con `npm run build`.
+
+## Mejoras que haría con más tiempo
+
+- **Estado abierto del menú de navegación:** el Figma no lo dibuja. Hoy se muestran las mismas pestañas y el botón "Reserva" apilados bajo la barra, sin diseño propio; falta que diseño defina su aspecto (fondo, separación, marcador de la pestaña activa) para sustituir esta versión mínima.
