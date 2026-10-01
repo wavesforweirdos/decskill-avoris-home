@@ -36,6 +36,7 @@
   --space-navbar-tabs: var(--space-lg);
   --space-footer-x: var(--space-2xl);
   --space-footer-y: var(--space-3xl);
+  --space-hero-x: var(--space-40);
 
   // Tamaños
   --size-icon-sm: var(--size-16);
@@ -46,6 +47,7 @@
   --size-control-lg: var(--size-56);
   --size-target-min: var(--size-24); // WCAG 2.5.8: objetivo táctil mínimo
   --size-navbar: var(--size-56);
+  --size-hero: var(--size-400);
   --size-tab-marker-width: var(--size-18);
   --size-tab-marker-height: var(--size-12);
   --size-dot: var(--size-10);
@@ -131,6 +133,7 @@
     --space-section: var(--space-72);
     --space-section-header: var(--space-72);
     --space-navbar-tabs: var(--space-72);
+    --space-hero-x: var(--space-16);
   }
 }
 

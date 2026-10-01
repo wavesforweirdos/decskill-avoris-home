@@ -7,3 +7,12 @@
   outline-offset: var(--border-width-strong);
   box-shadow: 0 0 0 var(--border-width-strong) $focus-ring-halo;
 }
+
+// El mismo anillo hacia dentro, para elementos que tocan el borde de la página o de su contenedor
+// (la pestaña del navbar, la pista del carrusel) y cuyo anillo exterior se cortaría: el anillo en el
+// borde de la caja y el halo claro justo debajo.
+@mixin focus-ring-inset {
+  outline: var(--border-width-strong) solid $focus-ring-color;
+  outline-offset: calc(-1 * var(--border-width-strong));
+  box-shadow: inset 0 0 0 calc(2 * var(--border-width-strong)) $focus-ring-halo;
+}
