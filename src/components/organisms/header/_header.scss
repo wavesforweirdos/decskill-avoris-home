@@ -7,7 +7,7 @@
 // Mejora progresiva con @media (scripting: enabled): solo si hay JavaScript el menú se pliega,
 // aparece el botón y el panel abierto flota sobre la página sin desplazarla, desde el primer
 // pintado y sin saltos. Sin JavaScript (o en navegadores que no
-// conocen la media query, como Safari < 17) la navegación se queda visible en flujo (D-34).
+// conocen la media query, como Safari < 17) la navegación se queda visible en flujo.
 .header {
   position: relative;
   display: flex;
@@ -72,7 +72,7 @@
 }
 
 // Menú: en columna y, sin JavaScript, en flujo bajo la barra. El estado abierto no está en el Figma;
-// se ha hecho lo mínimo funcional con las pestañas y el botón existentes (D-33).
+// se ha hecho lo mínimo funcional con las pestañas y el botón existentes.
 .header__menu {
   display: flex;
   flex: 0 0 calc(100% + 2 * var(--space-navbar-x));

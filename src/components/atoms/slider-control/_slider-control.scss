@@ -15,15 +15,19 @@
   border: var(--border-width) solid transparent;
   border-radius: var(--radius-slider-control);
 
-  // El fondo se calcula en brand/components/_slider.scss: el 32 % de Brand da 1,80:1 con el icono
-  // blanco, y el 56 % da 3,05:1, el mínimo para un icono (WCAG 1.4.11, D-20). Es un color opaco,
-  // así que el contraste no depende de la imagen que haya detrás.
-  background-color: $button-slider-navigation-background-default;
+  // Como en el Figma: el color de Brand (primary-700 al 32 %) sobre un relleno blanco opaco, de modo
+  // que el aspecto no depende de la foto que haya detrás.
+  background-color: $slider-control-underlay;
+  background-image: linear-gradient(
+    $button-slider-navigation-background-default,
+    $button-slider-navigation-background-default
+  );
   color: $button-slider-navigation-icon-default;
   cursor: pointer;
 
   &:hover {
     background-color: $button-slider-navigation-background-hover;
+    background-image: none;
     color: $button-slider-navigation-icon-hover;
   }
 }

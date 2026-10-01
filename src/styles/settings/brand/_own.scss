@@ -4,11 +4,12 @@
 // SIN EQUIVALENTE EN FIGMA. Variables propias del proyecto, con nombre propio. Las usan los
 // componentes igual que las de components/.
 
-$section-title-default: $color-foreground-on-light-default; // D-11 (el Figma usa #2F222F)
+$section-title-default: $color-foreground-on-light-default; // el Figma usa #2F222F, que no está en la paleta
 $circuit-card-grid-title-default: $color-foreground-on-light-default; // título de grupo ("Asia")
 $info-tooltip-icon-default: $color-icon-black-default; // el Figma usa color/icon/black-default
 $page-background: $color-background-white-default;
 $page-text: $color-foreground-on-light-default;
-$focus-ring-color: $primary-700; // D-19
-$focus-ring-halo: $basic-000-white; // D-19
-$footer-border-top-default: $color-border-medium-default; // Brand no define borde del footer; sí lo dibuja el Figma (D-35)
+$focus-ring-color: $primary-700; // anillo de foco de dos tonos: el Figma no define el foco
+$focus-ring-halo: $basic-000-white;
+$slider-control-underlay: $color-background-white-default; // relleno blanco opaco que el Figma pone bajo el 32 % de la flecha
+$footer-border-top-default: $color-border-medium-default; // Brand no define borde del footer; sí lo dibuja el Figma

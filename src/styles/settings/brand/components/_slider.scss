@@ -1,17 +1,17 @@
-@use 'sass:color';
 @use '../global' as *;
 @use '../semantic' as *;
 
 // NIVEL 3 · COMPONENTE: slider-control y slider-dot (Figma: button/slider-navigation, indicator/slider).
 
-// D-20: Brand usa primary-low-alpha (32 %), que da 1,80:1 con el icono blanco. Con el 56 % de
-// primary-700 sobre blanco, calculado al compilar, da 3,05:1 (WCAG 1.4.11).
-$button-slider-navigation-background-default: color.mix($primary-700, $basic-000-white, 56%);
+// Brand: primary-low-alpha (primary-700 al 32 %). Con el icono blanco da 1,81:1 sobre el relleno blanco
+// que dibuja el Figma debajo, por debajo del 3:1 de WCAG 1.4.11. Se respeta Brand y el cambio para
+// cumplirlo está aquí, aislado: ver «Mejoras que haría con más tiempo» del README.
+$button-slider-navigation-background-default: $color-background-primary-low-alpha;
 $button-slider-navigation-background-hover: $primary-700;
 $button-slider-navigation-icon-default: $color-icon-white-default;
 $button-slider-navigation-icon-hover: $color-icon-white-hover;
 
-// indicator/slider (slider-dot; solo reposo y seleccionado: no es interactivo, D-23)
+// indicator/slider (slider-dot; solo reposo y seleccionado: no es interactivo)
 $indicator-slider-background-default: $color-background-white-high-alpha;
 $indicator-slider-border-default: $color-border-white-default;
 $indicator-slider-background-selected-default: $color-background-secondary-medium-default;
