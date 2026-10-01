@@ -27,7 +27,7 @@ const usesPrimitive = new RegExp(
 const rawLength = /(?<![\w.#-])(?:0*[1-9]\d*(?:\.\d+)?|0?\.\d*[1-9]\d*)(?:px|rem|em)\b/;
 
 // LIMITACIONES de las reglas de tokens (el linter no lo ve todo):
-// - Un primitivo pasado como argumento de un @include (`@include x(var(--color-purple-600))`) o
+// - Un primitivo pasado como argumento de un @include (`@include x(var(--color-primary-700))`) o
 //   construido con interpolación (`var(--color-#{$n})`) no se detecta.
 // - Las longitudes sueltas solo se vigilan en las propiedades de la lista (espaciado, tipografía
 //   y radios). width, height o inset no se comprueban.

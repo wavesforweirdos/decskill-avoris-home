@@ -5,46 +5,48 @@
 :root,
 [data-brand='waveless'] {
   // Marca
-  --color-primary: var(--color-purple-600);
-  --color-primary-hover: var(--color-purple-700);
-  --color-on-primary: var(--color-white);
-  --color-accent: var(--color-orange-400);
-  --color-accent-hover: var(--color-orange-500);
+  --color-primary: var(--color-primary-700);
+  --color-primary-hover: var(--color-primary-800);
+  --color-on-primary: var(--color-basic-000-white);
+  --color-on-primary-hover: var(--color-basic-050);
+  --color-accent: var(--color-secondary-400);
+  --color-accent-hover: var(--color-secondary-500);
 
-  // Texto sobre el naranja, 4,85:1. El Figma lo cambió de blanco a #6b2700 en su historial (D-04).
-  --color-on-accent: var(--color-brown-900);
+  // Texto sobre el naranja: los de la página Brand (secondary/800 y /900), 5,83:1 y 5,20:1. Brand
+  // manda sobre el changelog del botón, que hablaba de #6B2700 (D-26).
+  --color-on-accent: var(--color-secondary-800);
+  --color-on-accent-hover: var(--color-secondary-900);
 
-  // En hover, #6b2700 sobre el naranja oscuro daba 3,46:1; este es el mínimo que llega a 4,5:1 (D-05).
-  --color-on-accent-hover: var(--color-brown-950);
-
-  // Naranja de texto: el #b85c28 del Figma da 4,26:1 sobre el crema del panel de filtros; este es
-  // el mínimo que cumple AA sobre blanco y crema (D-01, D-02).
-  --color-accent-strong: var(--color-orange-700);
+  // Naranja de texto: el secondary/600 de Brand (#b85c28) da 4,26:1 sobre el crema del panel de
+  // filtros; este es el mínimo que cumple AA sobre blanco y crema (D-01, D-02).
+  --color-accent-strong: var(--color-secondary-650);
 
   // Texto
-  --color-text: var(--color-grey-900);
-  --color-text-hover: var(--color-grey-950);
+  --color-text: var(--color-basic-800);
+  --color-text-hover: var(--color-basic-900);
 
-  // Placeholder y subtítulo: 4,5:1 sobre blanco y crema. El #817781 del Figma daba 4,0:1 sobre
-  // crema, y el azul grisáceo del subtítulo, 4,25:1 sobre blanco (D-07, D-12).
-  --color-text-muted: var(--color-grey-600);
-  --color-text-muted-hover: var(--color-grey-700);
-  --color-on-media: var(--color-white); // texto sobre la imagen del hero
+  // Placeholder y subtítulo: el basic/500 de Brand (#817781) da 4,0:1 sobre crema; este llega a
+  // 4,5:1 sobre blanco y crema. El azul grisáceo del subtítulo tampoco cumplía (D-07, D-12).
+  --color-text-muted: var(--color-basic-550);
+  --color-text-muted-hover: var(--color-basic-600);
+  --color-on-media: var(--color-basic-000-white); // texto sobre la imagen del hero
+  --color-on-media-alpha: var(--color-basic-000-white-high-alpha); // punto inactivo del slider
 
   // Superficies y bordes
-  --color-surface: var(--color-white);
-  --color-surface-alt: var(--color-cream-50);
-  --color-surface-alt-hover: var(--color-cream-100);
-  --color-border: var(--color-grey-200);
-  --color-border-hover: var(--color-grey-300);
+  --color-surface: var(--color-basic-000-white);
+  --color-surface-hover: var(--color-basic-050);
+  --color-surface-alt: var(--color-secondary-050);
+  --color-surface-alt-hover: var(--color-secondary-100);
+  --color-border: var(--color-basic-100);
+  --color-border-hover: var(--color-basic-200);
 
   // Deshabilitado
-  --color-disabled: var(--color-grey-400);
-  --color-disabled-strong: var(--color-grey-500);
-  --color-disabled-text: var(--color-grey-700);
-  --color-on-accent-disabled: var(--color-grey-800);
+  --color-disabled: var(--color-basic-400);
+  --color-disabled-strong: var(--color-basic-500);
+  --color-disabled-text: var(--color-basic-600);
+  --color-on-accent-disabled: var(--color-basic-700);
 
   // Foco (D-19)
-  --color-focus: var(--color-purple-600);
-  --color-focus-halo: var(--color-white);
+  --color-focus: var(--color-primary-700);
+  --color-focus-halo: var(--color-basic-000-white);
 }
