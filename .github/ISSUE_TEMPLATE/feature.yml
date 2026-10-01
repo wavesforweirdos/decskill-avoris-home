@@ -1,0 +1,35 @@
+name: Tarea o funcionalidad
+description: Una sección, componente o mejora a maquetar
+labels: [enhancement]
+body:
+  - type: textarea
+    id: descripcion
+    attributes:
+      label: Descripción
+      description: Qué hay que hacer y por qué.
+    validations:
+      required: true
+  - type: input
+    id: figma
+    attributes:
+      label: Referencia en Figma
+      description: Nombre o enlace del nodo.
+  - type: checkboxes
+    id: breakpoints
+    attributes:
+      label: Breakpoints afectados
+      options:
+        - label: Móvil (390)
+        - label: Tablet pequeña (744)
+        - label: Tablet grande (1024)
+        - label: Desktop (1280 y más)
+  - type: textarea
+    id: criterios
+    attributes:
+      label: Criterios de aceptación
+      description: Incluye requisitos de accesibilidad e interacciones con teclado si los hay.
+      placeholder: |
+        - [ ] Coincide con el Figma en todos los breakpoints
+        - [ ] Navegable con teclado
+    validations:
+      required: true
