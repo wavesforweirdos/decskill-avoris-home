@@ -4,14 +4,12 @@
 // Al no haber objetivos pequeños, la separación de 8 px del Figma no incumple WCAG 2.5.8. Esa
 // separación (--space-sm) la pone el contenedor que agrupa los puntos.
 .slider-dot {
-  --slider-dot-mix: 72%;
-
   display: block;
   width: var(--size-dot);
   height: var(--size-dot);
   border: var(--border-width) solid var(--color-on-media);
   border-radius: 50%;
-  background-color: color-mix(in srgb, var(--color-on-media) var(--slider-dot-mix), transparent);
+  background-color: var(--color-on-media-alpha);
 }
 
 .slider-dot--current {
