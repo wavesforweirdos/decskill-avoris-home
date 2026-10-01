@@ -1,0 +1,8 @@
+@use '../semantic' as *;
+
+// NIVEL 3 · COMPONENTE: navbar (Figma: navbar/…). Nombre de Figma cambiando la barra por un guion.
+
+$navbar-background-default: $color-background-white-default;
+$navbar-menu-icon-default: $color-foreground-primary-dark-default; // D-29
+$navbar-menu-icon-hover: $color-foreground-primary-dark-hover; // D-29
+$navbar-border-default: $color-border-secondary-medium-default;

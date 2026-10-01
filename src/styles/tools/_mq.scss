@@ -15,3 +15,17 @@
     @content;
   }
 }
+
+// Lo contrario: de 0 hasta justo antes del breakpoint. @include mq-below(tablet-large) { … }
+// Usa la sintaxis de rango (width < …) porque max-width deja un hueco con anchos fraccionarios.
+@mixin mq-below($name) {
+  $width: map.get(breakpoints.$breakpoints, $name);
+
+  @if not $width {
+    @error 'Breakpoint desconocido: #{$name}';
+  }
+
+  @media (width < #{math.div($width, 16px)}em) {
+    @content;
+  }
+}

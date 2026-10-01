@@ -1,0 +1,8 @@
+@use '../semantic' as *;
+
+// NIVEL 3 · COMPONENTE: footer (Figma: footer/…). Nombre de Figma cambiando la barra por un guion.
+// list-item-text-* no se usa: la home no lleva el bloque de contacto (D-16).
+
+$footer-background-default: $color-background-secondary-light-default;
+$footer-background-bottom-bar-default: $color-background-medium-light-default;
+$footer-foreground-bottom-bar-default: $color-foreground-primary-dark-default;
