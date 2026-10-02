@@ -22,6 +22,8 @@
   cursor: pointer;
 }
 
+// Oculta con display: none y no con visibility: una burbuja oculta seguiría contando para el
+// desbordamiento del contenedor y, en un panel con scroll, sacaría una barra horizontal.
 // Va encima del icono, de una línea si cabe (como el "Lorem ipsum" del diseño) y, si el texto es más
 // largo, en varias con un ancho máximo para que no se salga del panel. El triángulo (::after) cubre
 // el hueco entre ambos, así el puntero puede pasar de uno a otro sin que el tooltip se cierre
@@ -41,7 +43,7 @@
   box-shadow: var(--shadow-raised);
   color: $overlay-text-default;
   font: var(--text-tooltip);
-  visibility: hidden;
+  display: none;
 
   &::after {
     content: '';
@@ -55,5 +57,5 @@
 }
 
 .info-tooltip:is(:hover, :focus-within):not([data-dismissed]) .info-tooltip__bubble {
-  visibility: visible;
+  display: block;
 }
