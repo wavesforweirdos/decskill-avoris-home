@@ -61,25 +61,10 @@
   height: var(--logo-height);
 }
 
-// El enlace del logo es más alto que la imagen desde 744 px: el anillo, en forma de píldora, va en un
-// pseudo-elemento del tamaño de la imagen, centrado. El área de clic no cambia.
+// El enlace del logo es más alto que la imagen desde 744 px: el anillo va en forma de píldora
+// alrededor de la imagen.
 .header__brand:focus-visible {
-  position: relative;
-  outline: none;
-  box-shadow: none;
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset-block-start: 50%;
-    inset-inline: 0;
-    height: var(--logo-height);
-    border-radius: var(--radius-control);
-    pointer-events: none;
-    translate: 0 -50%;
-
-    @include focus-ring($focus-gap-link);
-  }
+  @include focus-ring-pill(var(--logo-height));
 }
 
 // Botón de menú (burger). Oculto por defecto: sin JavaScript no tendría función.

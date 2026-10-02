@@ -65,3 +65,25 @@ $focus-gap-link: var(--space-xs);
     @include focus-ring($gap);
   }
 }
+
+// Para enlaces cuya caja es más alta que su contenido (el logo, «Ver 21 más»): anillo en forma de
+// píldora alrededor del contenido, a $focus-gap-link, centrado y con la altura $height del
+// contenido. Se incluye dentro de :focus-visible; el área de clic no cambia.
+@mixin focus-ring-pill($height) {
+  position: relative;
+  outline: none;
+  box-shadow: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline: 0;
+    height: $height;
+    border-radius: var(--radius-control);
+    pointer-events: none;
+    translate: 0 -50%;
+
+    @include focus-ring($focus-gap-link);
+  }
+}
