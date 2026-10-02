@@ -1,11 +1,13 @@
 @use '../settings/brand' as *;
 
 // Anillo de foco de dos tonos: el halo claro separa el anillo del elemento, así se ve tanto
-// sobre fondos claros como sobre la imagen oscura del hero. outline sigue el border-radius.
-@mixin focus-ring {
+// sobre fondos claros como sobre la imagen oscura del hero. outline sigue el border-radius. $gap es la
+// separación entre el elemento y el anillo (y el ancho del halo): 2 px, o menos en controles
+// pequeños donde el anillo estándar quedaría lejos de lo que se ve.
+@mixin focus-ring($gap: var(--border-width-strong)) {
   outline: var(--border-width-strong) solid $focus-ring-color;
-  outline-offset: var(--border-width-strong);
-  box-shadow: 0 0 0 var(--border-width-strong) $focus-ring-halo;
+  outline-offset: $gap;
+  box-shadow: 0 0 0 $gap $focus-ring-halo;
 }
 
 // El mismo anillo hacia dentro, para elementos que tocan el borde de la página o de su contenedor
