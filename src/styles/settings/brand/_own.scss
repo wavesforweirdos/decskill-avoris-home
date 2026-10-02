@@ -12,5 +12,7 @@ $page-background: $color-background-white-default;
 $page-text: $color-foreground-on-light-default;
 $focus-ring-color: $primary-700; // anillo de foco de dos tonos: el Figma no define el foco
 $focus-ring-halo: $basic-000-white;
+$filters-background: $color-background-secondary-light-default; // Brand no define el fondo del panel de filtros; el Figma usa el crema
+$scrollbar-thumb: $basic-500; // tirador de las barras de scroll internas; Brand no las define. 4,0:1 sobre el crema y 4,3:1 sobre blanco
 $slider-control-underlay: $color-background-white-default; // relleno blanco opaco que el Figma pone bajo el 32 % de la flecha
 $footer-border-top-default: $color-border-medium-default; // Brand no define borde del footer; sí lo dibuja el Figma

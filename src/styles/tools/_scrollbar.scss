@@ -1,0 +1,10 @@
+@use '../settings/brand' as *;
+
+// Barra de scroll fina para las zonas que se desplazan por dentro (el cajón de filtros y el desglose
+// de precios a pantalla completa). Solo propiedades estándar, sin ::-webkit-scrollbar: donde no se
+// soportan (Chrome 120, Safari anterior a 18.2) queda la barra del sistema, que funciona igual, y en
+// alto contraste el navegador las ignora. La barra de la propia página no se toca.
+@mixin scrollbar-thin {
+  scrollbar-color: $scrollbar-thumb transparent;
+  scrollbar-width: thin;
+}
