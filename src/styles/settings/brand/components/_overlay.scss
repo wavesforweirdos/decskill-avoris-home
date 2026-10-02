@@ -1,6 +1,16 @@
 @use '../semantic' as *;
 
-// NIVEL 3 · COMPONENTE: overlay (burbuja del info-tooltip) (Figma: overlay/…). Nombre de Figma cambiando la barra por un guion.
+// NIVEL 3 · COMPONENTE: overlay (burbuja del info-tooltip y popover del desglose de precios)
+// (Figma: overlay/…). Nombre de Figma cambiando la barra por un guion.
 
 $overlay-background-default: $color-background-white-default;
 $overlay-text-default: $color-foreground-text-on-light-default;
+$overlay-close-icon-default: $color-icon-black-default;
+$overlay-close-icon-hover: $color-icon-black-hover;
+$overlay-border-default: $color-border-medium-default;
+$overlay-top-bar-default: $color-background-secondary-light-default;
+$overlay-bottom-bar-default: $overlay-top-bar-default;
+$overlay-bar-text-default: $color-foreground-text-on-light-default;
+$overlay-bar-text-hover: $color-foreground-text-on-light-hover;
+$overlay-title-default: $color-foreground-title-default;
+$overlay-price-default: $color-foreground-text-on-light-default;

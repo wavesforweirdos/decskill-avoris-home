@@ -37,6 +37,7 @@
   --space-footer-x: var(--space-2xl);
   --space-footer-y: var(--space-3xl);
   --space-hero-x: var(--space-40);
+  --space-popover-gap: var(--space-20);
 
   // Tamaños
   --size-icon-sm: var(--size-16);
@@ -48,6 +49,11 @@
   --size-target-min: var(--size-24); // WCAG 2.5.8: objetivo táctil mínimo
   --size-navbar: var(--size-56);
   --size-hero: var(--size-400);
+  --size-card: var(--size-264);
+  --size-card-mobile: var(--size-360);
+  --size-card-image: var(--size-204);
+  --size-filters: var(--size-264);
+  --size-popover: var(--size-400);
   --size-tab-marker-width: var(--size-18);
   --size-tab-marker-height: var(--size-12);
   --size-dot: var(--size-10);
@@ -71,6 +77,7 @@
 
   // Capas
   --z-tooltip: 1;
+  --z-popover: 1;
   --z-menu: 2;
   --z-skip-link: 3;
 
@@ -106,6 +113,18 @@
   --text-link: var(--font-weight-600) var(--font-size-14) / var(--line-height-16) var(--font-body);
   --text-tooltip: var(--font-weight-500) var(--font-size-14) / var(--line-height-16)
     var(--font-body);
+  --text-popover-title: var(--font-weight-700) var(--font-size-18) / var(--line-height-24)
+    var(--font-body);
+  --text-popover-city: var(--font-weight-700) var(--font-size-18) / var(--line-height-24)
+    var(--font-heading);
+  --text-popover-days: var(--font-weight-500) var(--font-size-18) / var(--line-height-24)
+    var(--font-heading);
+  --text-popover-label: var(--font-weight-500) var(--font-size-16) / var(--line-height-20)
+    var(--font-body);
+  --text-popover-amount: var(--font-weight-700) var(--font-size-18) / var(--line-height-20)
+    var(--font-body);
+  --text-popover-total: var(--font-weight-700) var(--font-size-18) / var(--line-height-22)
+    var(--font-body);
   --text-legal: var(--font-weight-700) var(--font-size-14) / var(--line-height-20) var(--font-body);
   --text-field-value: var(--font-weight-500) var(--font-size-14) / var(--line-height-20)
     var(--font-body);
@@ -118,6 +137,7 @@
     --space-navbar-x: var(--space-xl);
     --space-footer-x: var(--space-xl);
     --size-navbar: var(--size-80);
+    --size-card-image: var(--size-188);
   }
 }
 
