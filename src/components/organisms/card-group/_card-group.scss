@@ -1,0 +1,31 @@
+@use 'styles/tools' as *;
+
+// Grupo de cards ("Asia"): título y lista. Es un role="group" y no una región: los dos grupos se
+// llaman igual y dos landmarks con el mismo nombre no se distinguen. Usa las columnas del catálogo
+// con subgrid, así el título queda alineado con la primera card sea cual sea el número de columnas.
+.card-group {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  row-gap: var(--space-lg);
+}
+
+// En móvil el título deja 16 px más que las cards, como en el Figma.
+.card-group__title {
+  grid-column: 1 / -1;
+  padding-inline: var(--space-lg);
+
+  @include mq(tablet-small) {
+    padding-inline: 0;
+  }
+}
+
+// El margen inferior deja sitio a la sombra de la última fila (8 px en el Figma). Es un margen y no
+// un padding porque el reset deja los ul con clase sin padding y gana por especificidad.
+.card-group__list {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  gap: var(--space-xl);
+  margin-block-end: var(--space-sm);
+}

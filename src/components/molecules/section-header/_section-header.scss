@@ -1,0 +1,24 @@
+@use 'styles/settings/brand' as *;
+@use 'styles/tools' as *;
+
+// Título y subtítulo centrados de una sección. En móvil el texto deja 32 px a cada lado, como en el
+// Figma, y el hueco entre título y subtítulo es de 16 px (8 desde 744). Los tamaños son fluidos
+// (tokens --text-section-title y --text-section-subtitle).
+.section-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  padding-inline: var(--space-2xl);
+  text-align: center;
+
+  @include mq(tablet-small) {
+    gap: var(--space-sm);
+    padding-inline: 0;
+  }
+}
+
+.section-header__subtitle {
+  color: $section-subtitle-default;
+  font: var(--text-section-subtitle);
+}

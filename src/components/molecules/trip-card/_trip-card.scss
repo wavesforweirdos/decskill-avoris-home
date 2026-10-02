@@ -1,0 +1,162 @@
+@use 'styles/settings/brand' as *;
+@use 'styles/tools' as *;
+
+// Card de circuito: foto con etiqueta, cuerpo con destino y título, y pie con precio, desglose y
+// botón. Flex en columna para las tres franjas y Grid en el pie, porque el orden cambia: en
+// desktop y tablet el botón va a la derecha; en móvil, el desglose a la izquierda, el precio a la
+// derecha y el botón debajo, a todo el ancho.
+.trip-card {
+  --trip-card-text: #{$card-text-default};
+  --trip-card-title: #{$card-title-default};
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-card);
+  background-color: $card-background-default;
+  box-shadow: var(--shadow-raised);
+
+  &:hover {
+    --trip-card-text: #{$card-text-hover};
+    --trip-card-title: #{$card-title-hover};
+
+    background-color: $card-background-hover;
+    box-shadow: var(--shadow-raised-hover);
+  }
+}
+
+.trip-card__media {
+  position: relative;
+}
+
+.trip-card__photo {
+  display: block;
+  width: 100%;
+  height: var(--size-card-image);
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  object-fit: cover;
+}
+
+.trip-card__tag {
+  position: absolute;
+  inset-block-start: var(--space-lg);
+  inset-inline-end: var(--space-lg);
+}
+
+.trip-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+}
+
+.trip-card__place {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.trip-card__city {
+  color: var(--trip-card-title);
+  font: var(--text-card-city);
+}
+
+.trip-card__days {
+  color: var(--trip-card-text);
+  font: var(--text-card-days);
+}
+
+// El Figma parte el título en cuanto no cabe, sin equilibrar las líneas como hace el reset con los
+// títulos: "Descubre Bangkok con / Iberojet".
+.trip-card__title {
+  color: var(--trip-card-text);
+  font: var(--text-card-title);
+  text-wrap: wrap;
+}
+
+.trip-card__bar {
+  display: grid;
+  grid-template-areas:
+    'breakdown price'
+    'book book';
+  grid-template-columns: 1fr auto;
+  gap: var(--space-md) var(--space-lg);
+  align-items: end;
+  padding: var(--space-md) var(--space-lg) var(--space-lg);
+  border-radius: 0 0 var(--radius-card) var(--radius-card);
+  background-color: $card-circuit-card-bottom-bar-background-default;
+
+  &:hover {
+    background-color: $card-circuit-card-bottom-bar-background-hover;
+  }
+
+  @include mq(tablet-small) {
+    grid-template-areas:
+      'price book'
+      'breakdown book';
+    row-gap: var(--space-3xs);
+  }
+}
+
+.trip-card__price {
+  display: flex;
+  flex-direction: column;
+  grid-area: price;
+  align-items: flex-end;
+
+  @include mq(tablet-small) {
+    align-items: flex-start;
+  }
+}
+
+.trip-card__from {
+  color: $card-top-price-text;
+  font: var(--text-caption);
+}
+
+.trip-card__amount {
+  color: $card-price;
+  font: var(--text-price);
+}
+
+// El texto mide 16 px, pero el objetivo táctil debe llegar a 24 (WCAG 2.5.8): el botón se alarga
+// y el margen negativo conserva el layout del Figma.
+.trip-card__breakdown {
+  display: inline-flex;
+  grid-area: breakdown;
+  align-items: center;
+  place-self: end start;
+  min-height: var(--size-target-min);
+  margin-block: calc((var(--size-icon-sm) - var(--size-target-min)) / 2);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: $card-breakdown-foreground-default;
+  font: var(--text-link);
+  cursor: pointer;
+
+  &:hover {
+    color: $card-breakdown-foreground-hover;
+  }
+}
+
+.trip-card__breakdown-label {
+  text-decoration: underline;
+}
+
+.trip-card__chevron {
+  color: $card-breakdown-chevron-default;
+}
+
+.trip-card__breakdown:hover .trip-card__chevron {
+  color: $card-breakdown-chevron-hover;
+}
+
+.trip-card__book {
+  grid-area: book;
+  align-self: end;
+
+  // En móvil el botón ocupa todo el ancho de la fila.
+  @include mq-below(tablet-small) {
+    justify-self: stretch;
+  }
+}
