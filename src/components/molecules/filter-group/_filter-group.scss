@@ -1,4 +1,5 @@
 @use 'styles/settings/brand' as *;
+@use 'styles/tools' as *;
 
 // Grupo plegable del panel de filtros. Es un <details> nativo: se abre y se cierra sin JavaScript,
 // el teclado y el estado expandido son accesibles de serie y el buscador del navegador abre el
@@ -34,6 +35,29 @@
     --filter-group-name: #{$filters-filter-name-text-hover};
     --filter-group-icon: #{$filters-icon-hover};
     --filter-group-chevron: #{$filters-chevron-hover};
+  }
+
+  // Con el foco se resalta el chevron, no toda la fila. El chevron es un icono con máscara, que
+  // recortaría su propio anillo: el anillo es un pseudo-elemento del tamaño del chevron, a su altura
+  // y pegado al borde final. El área de clic no cambia.
+  &:focus-visible {
+    position: relative;
+    outline: none;
+    box-shadow: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset-block-start: 50%;
+      inset-inline-end: 0;
+      width: var(--size-icon-md);
+      height: var(--size-icon-md);
+      border-radius: 50%;
+      pointer-events: none;
+      translate: 0 -50%;
+
+      @include focus-ring;
+    }
   }
 }
 
