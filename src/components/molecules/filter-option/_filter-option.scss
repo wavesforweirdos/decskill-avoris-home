@@ -1,0 +1,55 @@
+@use 'styles/settings/brand' as *;
+
+// Opción de un filtro: checkbox, etiqueta y, si hace falta, el tooltip de información. Mide 48 px
+// de alto como en el Figma; el checkbox y el botón del tooltip ya miden 24 px, el mínimo de
+// WCAG 2.5.8 para un objetivo táctil.
+.filter-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-height: var(--size-control-base);
+}
+
+// Entre la etiqueta y el icono de información hay 6 px en el Figma (el resto de huecos son de 8):
+// se restan 2 al hueco del flex.
+.filter-option .info-tooltip {
+  margin-inline-start: calc(var(--space-xs) - var(--space-sm));
+}
+
+// Etiqueta con la negrita de la opción marcada. El texto visible y una copia invisible con la
+// negrita comparten celda: la celda siempre mide lo que mide la versión en negrita, así que marcar
+// una opción no mueve el icono del tooltip ni cambia dónde parte la línea. La copia va con
+// aria-hidden y visibility: hidden, de modo que los lectores de pantalla no la leen.
+.filter-option__label {
+  display: grid;
+  cursor: pointer;
+}
+
+.filter-option__text,
+.filter-option__ghost {
+  grid-area: 1 / 1;
+}
+
+.filter-option__text {
+  color: $form-checkbox-text-default;
+  font: var(--text-control);
+}
+
+.filter-option__ghost {
+  font: var(--text-control-strong);
+  visibility: hidden;
+}
+
+.filter-option__label:hover .filter-option__text {
+  color: $form-checkbox-text-hover;
+}
+
+// Marcada: negrita. El checkbox va justo antes de la etiqueta.
+.checkbox:checked + .filter-option__label .filter-option__text {
+  color: $form-checkbox-text-selected;
+  font: var(--text-control-strong);
+}
+
+.checkbox:checked + .filter-option__label:hover .filter-option__text {
+  color: $form-checkbox-foreground-selected-hover;
+}
