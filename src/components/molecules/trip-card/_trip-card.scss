@@ -139,9 +139,9 @@
   }
 
   // Con el foco se resalta el chevron, no el enlace entero. Entre la etiqueta y el chevron no hay
-  // separación, así que el anillo va sin hueco (gap 0) para invadir lo mínimo la última letra.
+  // separación: el anillo va dentro de la caja del chevron para no montarse sobre la etiqueta.
   &:focus-visible {
-    @include focus-ring-trailing-icon(var(--size-icon-sm), 0);
+    @include focus-ring-trailing-icon(var(--size-icon-sm), true);
   }
 }
 
