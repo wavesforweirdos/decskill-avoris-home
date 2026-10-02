@@ -27,7 +27,10 @@ $color-foreground-title-default: $primary-700;
 $color-foreground-black-default: $basic-800;
 $color-foreground-medium-light-default: $basic-500;
 $color-foreground-medium-light-hover: $basic-600;
-$color-foreground-secondary-dark-default: $secondary-650; // Brand: secondary-600; se usa el ajuste AA para texto
+
+// A11Y-WARNING [WCAG 1.4.3] Contraste 4,26:1 (mínimo 4,5:1) del nombre del grupo abierto sobre el crema.
+// Valor del Figma, no se modifica. Propuesta: #b25927 (4,50:1).
+$color-foreground-secondary-dark-default: $secondary-600;
 $color-foreground-secondary-dark-hover: $secondary-700;
 $color-foreground-link-default: $primary-700;
 $color-foreground-link-hover: $primary-800;
@@ -47,7 +50,7 @@ $color-border-medium-hover: $basic-200;
 $color-border-primary-dark-default: $primary-700;
 $color-border-primary-dark-hover: $primary-800;
 $color-border-primary-dark-disabled: $basic-500;
-$color-icon-secondary-dark-default: $secondary-650; // Brand: secondary-600; se usa el ajuste AA
+$color-icon-secondary-dark-default: $secondary-600;
 $color-icon-white-default: $basic-000-white;
 $color-icon-white-hover: $basic-000-white;
 $color-icon-black-default: $basic-800;
