@@ -55,6 +55,11 @@
 .hero-slide__cta {
   white-space: nowrap;
 
+  // Sobre la foto: anillo con los tonos invertidos.
+  &:focus-visible {
+    @include focus-ring-on-photo;
+  }
+
   @include mq-below(tablet-small) {
     --button-padding-x: var(--space-control-x-lg);
     --button-min-height: var(--size-control-lg);

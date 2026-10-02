@@ -18,3 +18,20 @@
   outline-offset: calc(-1 * var(--border-width-strong));
   box-shadow: inset 0 0 0 calc(2 * var(--border-width-strong)) $focus-ring-halo;
 }
+
+// Sobre la foto del hero: los mismos dos tonos con el orden invertido, el blanco fuera y el morado
+// dentro. Sobre una foto oscura el morado exterior casi no se distingue (1,0 a 1,8:1) y el blanco
+// sí (7,5:1 o más); el morado queda entre el blanco y el control (4,4:1 o más).
+@mixin focus-ring-on-photo($gap: var(--border-width-strong)) {
+  outline: var(--border-width-strong) solid $focus-ring-halo;
+  outline-offset: $gap;
+  box-shadow: 0 0 0 $gap $focus-ring-color;
+}
+
+// Lo mismo hacia dentro, para los controles pegados al borde de la ventana (las flechas), donde el
+// anillo exterior se cortaría.
+@mixin focus-ring-inset-on-photo {
+  outline: var(--border-width-strong) solid $focus-ring-halo;
+  outline-offset: calc(-1 * var(--border-width-strong));
+  box-shadow: inset 0 0 0 calc(2 * var(--border-width-strong)) $focus-ring-color;
+}
