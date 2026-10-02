@@ -9,11 +9,11 @@
   </div>
   <div class="trip-card__bar">
     <p class="trip-card__price"><span class="trip-card__from">Desde</span> <span class="trip-card__amount">{{price}}</span></p>
-    <button class="trip-card__breakdown" type="button" aria-expanded="false" aria-controls="{{popoverId}}" aria-label="{{breakdownLabel}}" hidden>
+    <button class="trip-card__breakdown" type="button" aria-expanded="false" aria-controls="{{popoverId}}" aria-label="Ver desglose de precios: {{title}}, {{city}} ({{groupTitle}}, grupo {{groupNumber}}, opción {{position}})" hidden>
       <span class="trip-card__breakdown-label">Ver desglose</span>
       {{> atoms/icon/icon name="chevron-down" size="sm" class="trip-card__chevron"}}
     </button>
-    {{> atoms/button/button variant="secondary" size="sm" label="Reservar" href="#" ariaLabel=bookLabel class="trip-card__book"}}
+    {{> atoms/button/button variant="secondary" size="sm" label="Reservar" href="#" ariaLabel=(concat "Reservar: " title ", " city " (" groupTitle ", grupo " groupNumber ", opción " position ")") class="trip-card__book"}}
   </div>
   {{> molecules/price-popover/price-popover id=popoverId city=city days=days}}
 </article>
