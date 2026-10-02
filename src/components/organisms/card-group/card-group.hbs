@@ -1,0 +1,13 @@
+<div class="card-group" role="group" aria-labelledby="{{groupId}}-title">
+  {{> atoms/heading/heading level="3" variant="group" text=title id=titleId class="card-group__title"}}
+  <ul class="card-group__list">
+    <li>{{> molecules/trip-card/trip-card photo="card-bangkok" tag="Quads" city="Marruecos, África" days="9 días" title="Descubre Bangkok con Iberojet" price="248,00 €" popoverId=popoverBangkok breakdownLabel="Ver desglose de precios: Descubre Bangkok con Iberojet" bookLabel="Reservar: Descubre Bangkok con Iberojet"}}</li>
+    <li>{{> molecules/trip-card/trip-card photo="card-desert" tag="Quads" city="Marruecos, África" days="9 días" title="Descubre Bangkok con Iberojet" price="248,00 €" popoverId=popoverDesert breakdownLabel="Ver desglose de precios: Descubre Bangkok con Iberojet" bookLabel="Reservar: Descubre Bangkok con Iberojet"}}</li>
+    <li>{{> molecules/trip-card/trip-card photo="card-town" tag="Quads" city="Marruecos, África" days="9 días" title="Descubre Bangkok con Iberojet" price="248,00 €" popoverId=popoverTown breakdownLabel="Ver desglose de precios: Descubre Bangkok con Iberojet" bookLabel="Reservar: Descubre Bangkok con Iberojet"}}</li>
+    {{#if more}}
+    <li>{{> molecules/trip-card/trip-card photo="card-bangkok" tag="Quads" city="Marruecos, África" days="9 días" title="Descubre Bangkok con Iberojet" price="248,00 €" popoverId=popoverBangkokMore breakdownLabel="Ver desglose de precios: Descubre Bangkok con Iberojet" bookLabel="Reservar: Descubre Bangkok con Iberojet"}}</li>
+    <li>{{> molecules/trip-card/trip-card photo="card-desert" tag="Quads" city="Marruecos, África" days="9 días" title="Descubre Bangkok con Iberojet" price="248,00 €" popoverId=popoverDesertMore breakdownLabel="Ver desglose de precios: Descubre Bangkok con Iberojet" bookLabel="Reservar: Descubre Bangkok con Iberojet"}}</li>
+    <li>{{> molecules/trip-card/trip-card photo="card-town" tag="Quads" city="Marruecos, África" days="9 días" title="Descubre Bangkok con Iberojet" price="248,00 €" popoverId=popoverTownMore breakdownLabel="Ver desglose de precios: Descubre Bangkok con Iberojet" bookLabel="Reservar: Descubre Bangkok con Iberojet"}}</li>
+    {{/if}}
+  </ul>
+</div>

@@ -1,0 +1,152 @@
+@use 'styles/settings/brand' as *;
+@use 'styles/tools' as *;
+
+// Desglose de precios de una card. Es un <dialog> que se abre de dos maneras según el ancho (la
+// lee breakdown.ts de --price-popover-modal, así el punto de corte vive solo aquí):
+// - por debajo de 744 px, modal a pantalla completa (showModal), como la variante móvil del Figma;
+// - desde 744 px, popover no modal (show) de 400 px anclado a la card, centrado sobre ella.
+// Sin JavaScript no se abre y el botón "Ver desglose" tampoco se muestra.
+.price-popover {
+  --price-popover-modal: 1;
+  --price-popover-inset: var(--space-lg);
+
+  position: fixed;
+  inset: 0;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: var(--border-width) solid $overlay-border-default;
+  background-color: $overlay-background-default;
+  color: $overlay-text-default;
+  overflow: auto;
+
+  // El navegador oculta el dialog cerrado; solo hay que dar el display al abierto.
+  &[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // La pantalla completa ya tapa la página: el fondo del modal no añade nada.
+  &::backdrop {
+    background: transparent;
+  }
+
+  @include mq(tablet-small) {
+    --price-popover-modal: 0;
+    --price-popover-inset: var(--space-xl);
+
+    position: absolute;
+    inset: auto;
+    inset-block-start: calc(100% - var(--space-sm));
+    inset-inline-start: 50%;
+    z-index: var(--z-popover);
+    width: var(--size-popover);
+    height: auto;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-raised);
+    translate: -50% 0;
+    overflow: hidden;
+  }
+}
+
+.price-popover__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg);
+  background-color: $overlay-top-bar-default;
+}
+
+// Los filetes de 1 px van dentro de las franjas de 56 y 64 px del Figma: se restan del padding.
+.price-popover__bar--top {
+  padding-block-end: calc(var(--space-lg) - var(--border-width));
+  border-block-end: var(--border-width) solid $overlay-border-default;
+}
+
+.price-popover__title {
+  padding-inline-start: var(--space-sm);
+  color: $overlay-bar-text-default;
+  font: var(--text-popover-title);
+}
+
+// Icono de 24 px: ya cumple el tamaño mínimo del objetivo táctil.
+.price-popover__close {
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: $overlay-close-icon-default;
+  cursor: pointer;
+
+  &:hover {
+    color: $overlay-close-icon-hover;
+  }
+}
+
+.price-popover__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  padding: var(--space-xl) var(--price-popover-inset);
+
+  @include mq(tablet-small) {
+    gap: var(--space-popover-gap);
+  }
+}
+
+.price-popover__place {
+  display: flex;
+  gap: var(--space-control-gap);
+}
+
+.price-popover__city {
+  color: $overlay-title-default;
+  font: var(--text-popover-city);
+}
+
+.price-popover__days {
+  font: var(--text-popover-days);
+}
+
+.price-popover__rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.price-popover__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+
+  dt {
+    font: var(--text-popover-label);
+  }
+
+  dd {
+    margin: 0;
+    color: $overlay-price-default;
+    font: var(--text-popover-amount);
+  }
+}
+
+.price-popover__total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(var(--space-popover-gap) - var(--border-width)) var(--price-popover-inset)
+    var(--space-popover-gap);
+  border-block-start: var(--border-width) solid $overlay-border-default;
+  background-color: $overlay-bottom-bar-default;
+  font: var(--text-popover-total);
+}
+
+.price-popover__total-amount {
+  color: $overlay-price-default;
+  font: var(--text-price);
+}

@@ -1,0 +1,59 @@
+@use 'styles/tools' as *;
+
+// Sección del catálogo: cabecera y cuerpo. El cuerpo es un Grid cuyas columnas son las de las cards
+// (264 px): 1 en móvil, 2 desde 744 y 3 desde 1024. Son columnas explícitas y no auto-fill: con
+// auto-fill, a 1176 px caben 4 y la rejilla dejaría de ser la del diseño. Desde 1280 se añade una
+// primera columna de 264 px para los filtros y las cards empiezan en la segunda: la columna se
+// reserva solo con el grid, sin ningún elemento vacío. El panel llega en otro PR.
+.catalog {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-section-header);
+  padding-block: var(--space-section);
+  padding-inline: var(--space-gutter);
+}
+
+.catalog__body {
+  display: grid;
+  grid-template-columns: minmax(0, var(--size-card-mobile));
+  gap: var(--space-xl);
+  justify-content: center;
+
+  @include mq(tablet-small) {
+    grid-template-columns: repeat(2, var(--size-card));
+  }
+
+  @include mq(tablet-large) {
+    grid-template-columns: repeat(3, var(--size-card));
+  }
+
+  @include mq(desktop) {
+    grid-template-columns: var(--size-filters) repeat(3, var(--size-card));
+  }
+}
+
+// "Ver filtros": centrado hasta 1024 px, a la izquierda de las cards desde ahí, y oculto desde 1280,
+// donde los filtros ocupan su columna. Todavía no abre nada (se conecta en el PR de filtros).
+.catalog__filters-toggle {
+  grid-column: 1 / -1;
+  justify-self: center;
+
+  @include mq(tablet-large) {
+    justify-self: start;
+  }
+
+  @include mq(desktop) {
+    display: none;
+  }
+}
+
+.catalog__groups {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  row-gap: var(--space-xl);
+
+  @include mq(desktop) {
+    grid-column: 2 / -1;
+  }
+}

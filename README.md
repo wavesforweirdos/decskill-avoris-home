@@ -66,6 +66,12 @@ La foto del hero se sirve en WebP (todos los navegadores objetivo lo soportan), 
 
 El carrusel funciona sin JavaScript (pista con `scroll-snap`) y `hero.ts` añade las flechas, el indicador y el anuncio de la posición. No hay avance automático.
 
+## Cards y desglose de precios
+
+Las cards son una rejilla de columnas de 264 px: 1 en móvil, 2 desde 744 px y 3 desde 1024 px, siempre con ese número de columnas aunque el ancho dé para más. Desde 1280 px el catálogo reserva a la izquierda una columna de 264 px para los filtros, solo con el grid, sin ningún elemento vacío. Los dos grupos de la home repiten el contenido de ejemplo del diseño: el primero con tres cards y el segundo con seis, como en los layouts de desktop y tablet grande. Cada foto se sirve en WebP a 264 y 528 px (`srcset` con `sizes`) y con `loading="lazy"`.
+
+El desglose de precios es un `<dialog>` dentro de cada card que se abre de dos maneras según el ancho. Por debajo de 744 px es un modal a pantalla completa (`showModal()`), como la variante móvil del diseño: el navegador mantiene el foco dentro y cierra con Escape. Desde 744 px es un popover no modal de 400 px centrado sobre la card (`show()`): se cierra con Escape, con el botón de cerrar o con un clic fuera, y solo hay uno abierto a la vez. El CSS decide el modo con una propiedad (`--price-popover-modal`) que lee el script, así el punto de corte no se repite en TypeScript. No usa la API nativa `popover`, que no soportan Firefox 120 ni Safari 16.4. Sin JavaScript el botón "Ver desglose" no se muestra.
+
 ## Sistema de diseño y multimarca
 
 Los colores siguen los tres niveles de la página Brand del Figma, como variables de Sass dentro de una carpeta, `src/styles/settings/brand/`, con un archivo por nivel (`_global.scss`, `_semantic.scss`) y uno por componente en `components/` (`_button.scss`, `_tag.scss`…). Cada nivel solo usa los anteriores, y un componente solo usa el último:
@@ -92,3 +98,4 @@ La multimarca es por compilación: cada marca genera su propio CSS a partir del 
 
 - **Estado abierto del menú de navegación:** el Figma no lo dibuja. Hoy se muestran las mismas pestañas y el botón "Reserva" apilados bajo la barra, sin diseño propio; falta que diseño defina su aspecto (fondo, separación, marcador de la pestaña activa) para sustituir esta versión mínima.
 - **Contraste de las flechas del carrusel:** el icono blanco queda a 1,81:1 sobre el fondo de Brand (el 32 % de morado sobre blanco), por debajo del 3:1 que exige WCAG 1.4.11. Hay dos soluciones: subir la opacidad del fondo al 56 % (icono a 3,05:1) o, manteniendo el fondo, pintar el icono con el morado de la marca (`$color-icon-primary-dark-default`, 5,55:1). El cambio está aislado en `src/styles/settings/brand/components/_slider.scss`.
+- **Fotos de las cards en móvil:** las tres fotos de las que se parte miden 528 × 376 px. En desktop y tablet equivalen a 2x, pero en móvil, donde la card mide 358 px, quedan algo blandas en pantallas 3x. Con exportaciones a 4x del diseño se generarían más anchos (716 y 1056 px) y se ampliaría el `srcset`.
