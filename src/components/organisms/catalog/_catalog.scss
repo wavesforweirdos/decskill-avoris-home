@@ -35,7 +35,7 @@
 }
 
 // "Ver filtros": abre el cajón de filtros, que existe por debajo de 1280 px. Solo se muestra con
-// JavaScript (scripting: enabled); sin él, o en navegadores que no conocen esa media query, el
+// JavaScript (js-enhanced); sin él, o si su módulo no carga, el
 // panel va apilado encima de los resultados y el botón sobraría. Centrado hasta 1024 px y a la
 // izquierda de las cards desde ahí. Desde 1280 los filtros ocupan su columna y el botón no se ve.
 .catalog__filters-toggle {
@@ -49,7 +49,7 @@
 }
 
 @include mq-below(desktop) {
-  @media (scripting: enabled) {
+  @include js-enhanced {
     .catalog__filters-toggle {
       display: inline-flex;
     }

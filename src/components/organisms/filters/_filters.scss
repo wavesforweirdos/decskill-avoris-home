@@ -5,8 +5,8 @@
 // JavaScript, filters.ts lo mueve a un <dialog> modal (un cajón) al pulsar "Ver filtros", así se
 // conservan las casillas, los precios y los grupos abiertos. Dónde se ve el aside:
 // - desde 1280 px: en la columna reservada del catálogo;
-// - por debajo, con JavaScript (scripting: enabled): oculto, y "Ver filtros" abre el cajón;
-// - por debajo, sin JavaScript o en navegadores que no conocen esa media query (Safari < 17): apilado
+// - por debajo, con JavaScript (js-enhanced): oculto, y "Ver filtros" abre el cajón;
+// - por debajo, sin JavaScript o si su módulo no carga: apilado
 //   encima de los resultados, a ancho completo en móvil y de 296 px en tablet. Así no se pierde nada.
 .filters {
   grid-column: 1 / -1;
@@ -41,7 +41,7 @@
 }
 
 @include mq-below(desktop) {
-  @media (scripting: enabled) {
+  @include js-enhanced {
     .filters {
       display: none;
     }
@@ -105,7 +105,7 @@
   }
 }
 
-@media (scripting: enabled) {
+@include js-enhanced {
   .filter-options--extra:not([data-open]) {
     display: none;
   }
