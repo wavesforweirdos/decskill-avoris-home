@@ -138,10 +138,10 @@
     color: $card-breakdown-foreground-hover;
   }
 
-  // Con el foco se resalta el chevron, no el enlace entero. Entre la etiqueta y el chevron no hay
-  // separación: el anillo va dentro de la caja del chevron para no montarse sobre la etiqueta.
+  // Píldora alrededor del enlace, más baja que la de los demás: arriba tiene el precio pegado, así que
+  // por arriba y por abajo el anillo queda a 2 px (la altura del propio botón) y por los lados, a 6.
   &:focus-visible {
-    @include focus-ring-trailing-icon(var(--size-icon-sm), true);
+    @include focus-ring-pill(var(--size-icon-sm), var(--border-width-strong));
   }
 }
 
