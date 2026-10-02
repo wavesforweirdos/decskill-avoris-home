@@ -61,6 +61,16 @@
   }
 }
 
+// iOS Safari amplía la página al enfocar un campo de menos de 16 px, y luego no la devuelve. Solo en iOS
+// (-webkit-touch-callout únicamente existe ahí) el campo pasa de los 14 px del diseño a 16; en el resto
+// de navegadores se mantiene el tamaño del Figma.
+/* stylelint-disable-next-line property-no-vendor-prefix */
+@supports (-webkit-touch-callout: none) {
+  .text-input__field {
+    font: var(--text-field-value-ios);
+  }
+}
+
 .text-input:hover .text-input__field::placeholder {
   color: $form-text-input-placeholder-hover;
 }
