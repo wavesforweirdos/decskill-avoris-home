@@ -7,6 +7,14 @@ html {
   font: var(--text-body);
 }
 
+// El anillo de foco sobresale 4 px del control. Al llevar un control al borde de un contenedor con
+// scroll (el panel de filtros, el cajón), el navegador lo deja pegado al borde y lo cortaría: este
+// margen de desplazamiento reserva ese espacio. Va siempre puesto, no solo con foco, para no depender
+// de cuándo aplica el navegador el estilo; sin foco no tiene ningún efecto visible.
+:where(a, button, input, summary, [tabindex]) {
+  scroll-margin-block: calc(2 * var(--border-width-strong));
+}
+
 // Foco visible para teclado en cualquier elemento interactivo. Los componentes que dibujan
 // su propio indicador, como el input, lo sustituyen.
 :focus-visible {
