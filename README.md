@@ -34,15 +34,15 @@ git config core.autocrlf false
 
 Navegadores objetivo: **Chrome 120**, **Safari 16.4** y **Firefox 120**, o posteriores. Es el valor de `build.cssTarget` en `vite.config.ts`: con esos mínimos el CSS no necesita prefijos (`-webkit-mask`) y la build no los duplica.
 
-| Navegador | Estado                                               |
-| --------- | ---------------------------------------------------- |
-| Chrome    | Verificado                                           |
-| Firefox   | Pendiente de verificar (se revisará en la auditoría) |
-| Safari    | Pendiente de verificar, en macOS (misma auditoría)   |
+| Navegador | Estado                                              |
+| --------- | --------------------------------------------------- |
+| Chrome    | Verificado                                          |
+| Firefox   | No verificado (ver «No verificado» en la auditoría) |
+| Safari    | No verificado en macOS; iPhone, comprobado a mano   |
 
 `text-wrap: balance` en los títulos es una mejora progresiva: los navegadores que no lo soportan muestran el texto sin equilibrar.
 
-El menú de navegación por debajo de 1024 px usa `@media (scripting: enabled)` para plegarse solo si hay JavaScript. Los navegadores que no conocen esa media query, como Safari anterior a 17, muestran la navegación siempre desplegada: es menos compacta pero funciona igual.
+El menú de navegación por debajo de 1024 px (y «Ver filtros» y «Ver 21 más») se pliega solo si hay JavaScript, con `@media (scripting: enabled)`. Si el módulo de JavaScript no llega a cargar, un script del `<head>` marca `data-js-failed` y esos estilos se desactivan: la página queda como sin JavaScript. Safari anterior a 17 no conoce la media query; `main.ts` lo detecta y activa los mismos estilos al cargar (mixin `js-enhanced`, en `src/styles/tools/_enhance.scss`).
 
 ## Decisiones técnicas
 
@@ -65,7 +65,7 @@ El menú de navegación por debajo de 1024 px usa `@media (scripting: enabled)` 
 
 ## Imágenes y carrusel del hero
 
-La foto del hero se sirve en WebP (todos los navegadores objetivo lo soportan), sin PNG de respaldo: `hero-1440.webp` y `hero-2880.webp` (1x y 2x) para anchos desde 744 px, y `hero-mobile-744.webp` y `hero-mobile-1488.webp` por debajo, con el recorte de la parte izquierda que enseña el diseño. Así un móvil descarga unos 20 KB (47 KB en pantallas 2x) en lugar de los 800 KB del PNG original. La primera imagen se pide con `fetchpriority="high"` por ser la candidata a LCP y reserva su espacio con `width` y `height`.
+La foto del hero se sirve en WebP (todos los navegadores objetivo lo soportan), sin PNG de respaldo: `hero-1440.webp` y `hero-2880.webp` (1x y 2x) para anchos desde 744 px, y `hero-mobile-744.webp` y `hero-mobile-1488.webp` por debajo, con el recorte de la parte izquierda que enseña el diseño. Hasta 430 px de ancho, que es lo que enseña un teléfono, se sirve un recorte más estrecho (`hero-mobile-430.webp` y `hero-mobile-860.webp`). Así un móvil descarga unos 5 KB (15 KB en pantallas 2x) en lugar de los 800 KB del PNG original. La primera imagen se pide con `fetchpriority="high"` por ser la candidata a LCP y reserva su espacio con `width` y `height`.
 
 El carrusel funciona sin JavaScript (pista con `scroll-snap`) y `hero.ts` añade las flechas, el indicador y el anuncio de la posición. No hay avance automático.
 
@@ -79,9 +79,32 @@ El desglose de precios es un `<dialog>` dentro de cada card que se abre de dos m
 
 El panel de filtros es un `<aside>` con un formulario que, desde 1280 px, ocupa la columna reservada del catálogo y se ve también sin JavaScript. Ahí se queda fijo al desplazar la página (`position: sticky`, a 24 px del borde superior) y se detiene al acabar su fila, sin pisar el pie; si no cabe en la pantalla, tiene alto máximo y scroll interno con la barra fina. Por debajo de 1280 px y con JavaScript, `filters.ts` mueve **el mismo nodo del formulario** a un `<dialog>` vacío y lo abre con `showModal()`, como un cajón a la izquierda de 296 px (a ancho completo en móvil); al cerrar lo devuelve al `<aside>`. Al ser el mismo nodo se conservan las casillas, los precios escritos y los grupos abiertos. Se cierra con Escape, con el botón de cerrar o con un clic fuera, el foco vuelve a "Ver filtros" y, si la ventana pasa a 1280 px o más, se cierra solo. Mientras está abierto, la página de fondo no se desplaza: el `body` se fija en su sitio (`position: fixed` con el desplazamiento ya hecho, porque iOS Safari ignora `overflow: hidden` con el dedo) y se conserva la barra de scroll de la página para que el contenido no cambie de ancho; al cerrar, la página vuelve a donde estaba. Lo mismo vale para el desglose de precios a pantalla completa; el cajón mide `100vh` y, donde se soporta, `100dvh`. Su barra de scroll interna (y la del desglose de precios en móvil) es fina y del color de la paleta, con las propiedades estándar `scrollbar-width` y `scrollbar-color`; la barra de la página no se toca, y donde esas propiedades no existen (Chrome 120, Safari anterior a 18.2) queda la del sistema.
 
-"Ver filtros" y el ocultar el `<aside>` van con `@media (scripting: enabled)`, igual que el menú. Sin JavaScript, o en navegadores que no conocen esa media query (Safari anterior a 17), el panel queda apilado encima de los resultados, sin el botón. Tampoco se pierde contenido: las 21 aventuras de "Ver 21 más" se ven todas y el botón no aparece; con JavaScript empiezan ocultas desde el primer pintado, sin parpadeo. Los grupos son `<details>` nativos, así que Destinos y Alojamiento se abren sin JavaScript. Los grupos son independientes, como en el diseño, que dibuja Aventura y Precio abiertos a la vez.
+"Ver filtros" y el ocultar el `<aside>` van con la misma mejora progresiva que el menú (`js-enhanced`). Sin JavaScript, o si su módulo no carga, el panel queda apilado encima de los resultados, sin el botón. Tampoco se pierde contenido: las 21 aventuras de "Ver 21 más" se ven todas y el botón no aparece; con JavaScript empiezan ocultas desde el primer pintado, sin parpadeo. Los grupos son `<details>` nativos, así que Destinos y Alojamiento se abren sin JavaScript. Los grupos son independientes, como en el diseño, que dibuja Aventura y Precio abiertos a la vez.
 
 Los filtros todavía no filtran las cards: los controles son de un `<form>` sin botón de envío que no recarga la página, tampoco con Enter. El contenido de los filtros (destinos, alojamientos, las 21 aventuras adicionales y los textos de los tooltips) es de ejemplo: no está en el Figma y se puede cambiar en `src/data/filters.json`.
+
+## Decisiones de comportamiento respecto al Figma
+
+El diseño manda en colores, tamaños, espaciados y tipografía. Estas decisiones son de comportamiento (el Figma es estático) o de semántica, y se mantienen:
+
+| Qué                             | Figma                                         | Hoy                                                                                                                              | Motivo                                                                                          |
+| ------------------------------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Burbuja del tooltip             | Una línea, sin ancho máximo                   | Ancho máximo de 176 px con salto de línea, y `display: none` mientras está oculta                                                | Una burbuja oculta pero con su caja ampliaba el ancho de la página y producía scroll horizontal |
+| Cajón de filtros                | Panel bajo el hero, a la altura de la sección | Cajón fijo a la altura de toda la pantalla                                                                                       | Es un modal: cubre la página para que el foco y el scroll de fondo queden bloqueados            |
+| Texto del pie                   | «@2024»                                       | «© 2024»                                                                                                                         | El símbolo correcto de copyright                                                                |
+| Logo y botón de la cabecera     | Posiciones del diseño                         | 0,5 px de diferencia a partir de 1024 px                                                                                         | Redondeo del layout flexible                                                                    |
+| Tamaño de los campos en iOS     | 14 px                                         | 16 px solo en iOS (`-webkit-touch-callout`)                                                                                      | Con menos de 16 px, Safari en iOS hace zoom al enfocar el campo                                 |
+| Añadidos que el Figma no dibuja | —                                             | Anillo de foco de dos tonos, enlace «Saltar al contenido», panel del menú abierto, columna de filtros fija, barra de scroll fina | Foco, teclado y comportamiento: el diseño no define estados interactivos ni este recorrido      |
+
+## Contenido de maqueta
+
+Se queda tal cual viene del diseño, para sustituirlo por el real:
+
+- Los 17 enlaces `href="#"` (pestañas del menú, botón «Reserva», «Reservar» de cada card y botones del hero).
+- La fila «Lorem ipsum» del desglose de precios.
+- El texto repetido de las cards («Descubre Bangkok con Iberojet», «Marruecos, África · 9 días», 248,00 €), que no coincide con las fotos.
+
+**Limitación de la maqueta:** las 9 cards del Figma tienen exactamente el mismo texto (destino, días, título y precio) y solo cambia la foto, que es decorativa, así que no hay ningún dato propio con el que distinguirlas. Por eso el nombre accesible de «Reservar» y «Ver desglose» lleva la posición («Reservar: Descubre Bangkok con Iberojet, Marruecos, África (Asia, grupo 2, opción 4)») para que cada enlace se distinga al recorrerlos con un lector de pantalla. Con contenido real, el título y el destino bastarán y se podrá quitar la posición.
 
 ## Sistema de diseño y multimarca
 
@@ -105,11 +128,98 @@ La multimarca es por compilación: cada marca genera su propio CSS a partir del 
 2. Revisar `brand/_semantic.scss` y `brand/components/` solo si el diseño de esa marca mapea los colores de otra forma.
 3. Compilar con `npm run build`.
 
+## Auditoría
+
+Fecha de las mediciones: 2 de octubre de 2026. Todas sobre el build de producción servido con `vite preview` (`npm run build && npx vite preview --port 4173 --strictPort`).
+
+| Herramienta | Versión                                                 |
+| ----------- | ------------------------------------------------------- |
+| Lighthouse  | 13.5.0                                                  |
+| axe-core    | 4.13.0 (inyectado con Playwright)                       |
+| Playwright  | playwright-core 1.63.0                                  |
+| Chrome      | 154.0.8037.93 (Lighthouse corre con HeadlessChrome 154) |
+| Node y npm  | 24.17.0 y 11.13.0                                       |
+
+Lighthouse, tres pasadas por perfil (la cifra es la mediana):
+
+```bash
+npx lighthouse@13.5.0 http://localhost:4173/ --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=lh/mobile-1.json
+npx lighthouse@13.5.0 http://localhost:4173/ --preset=desktop --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=lh/desktop-1.json
+```
+
+axe-core se ejecutó en 15 estados: la home a 1280, 1024, 744 y 390 px; menú abierto; carrusel en la segunda diapositiva; desglose como popover y como modal; cajón de filtros a 390 y 800 px; filtros con todo abierto y «Ver 21 más»; tooltip visible; y tres anchos sin JavaScript (se emula bloqueando el módulo y neutralizando la media query `scripting`).
+
+### Resultados, antes y después
+
+«Antes» es el build previo a esta fase, con los colores ajustados para cumplir. «Después» es el build con los valores del Figma restaurados y las correcciones. La diferencia en accesibilidad **son los valores del Figma marcados con `A11Y-WARNING`** (tabla de abajo), no un fallo de maquetación.
+
+| Medida           | Móvil antes | Móvil después | Escritorio antes | Escritorio después |
+| ---------------- | ----------- | ------------- | ---------------- | ------------------ |
+| Rendimiento      | 98          | 99            | 100              | 100                |
+| Accesibilidad    | 100         | 96            | 100              | 96                 |
+| Buenas prácticas | 100         | 100           | 100              | 100                |
+| SEO              | 92          | 100           | 92               | 100                |
+| FCP              | 1224 ms     | 976 ms        | 340 ms           | 271 ms             |
+| LCP              | 2049 ms     | 1819 ms       | 440 ms           | 412 ms             |
+| TBT              | 0 ms        | 0 ms          | 0 ms             | 0 ms               |
+| CLS              | 0           | 0             | 0                | 0                  |
+| Peso descargado  | 245 KB      | 202 KB        | 169 KB           | 160 KB             |
+
+axe-core: antes, 0 violaciones en los 15 estados. Después, una sola regla (`color-contrast`) en cinco nodos, todos con su `A11Y-WARNING`: el subtítulo de sección y el nombre de los grupos de filtros abiertos. El aviso incompleto sobre `aria-controls` desapareció. El SEO sube porque ahora existe un `robots.txt` real (el 92 anterior era un `robots.txt` inválido: `vite preview` devuelve el `index.html` para esa ruta).
+
+### Qué se corrigió
+
+- **Mejora progresiva (WCAG 2.1.1, 4.1.2).** Si JavaScript está activo pero su módulo no llega a cargar, un script del `<head>` marca `data-js-failed` y los estilos de mejora no se aplican: el menú, el panel de filtros y las 21 opciones quedan visibles en vez de ocultos tras botones que no hacen nada. En Safari anterior a 17, que no conoce la media query `scripting`, `main.ts` lo detecta y activa los mismos estilos al cargar (con un salto de maquetación inevitable).
+- **Nombres accesibles (WCAG 2.4.4).** «Reservar» y «Ver desglose» de las 9 cards tenían el mismo nombre; ahora cada uno lleva su posición (ver Contenido de maqueta).
+- **Hero con espaciado de texto (WCAG 1.4.12).** Con el interlineado y el espaciado de letras y de párrafos del criterio, el texto del hero se salía de su caja de 400 px en móvil. Ahora la caja tiene `min-height` y crece. Con los valores por defecto, las capturas cabecera y hero a 1280, 1024, 744 y 390 px son idénticas píxel a píxel.
+- **`aria-controls` del botón «Ver filtros».** Se quita: `aria-haspopup="dialog"` ya anuncia que abre un diálogo y axe no podía verificar el vínculo.
+- **`robots.txt`** real en `public/`.
+- **Imágenes.** Un móvil de hasta 430 px descarga un recorte exacto de lo que se ve del hero (`hero-mobile-430` y `hero-mobile-860`, 5 y 15 KB) en lugar del recorte de 744 o 1488 px (18 y 46 KB). El resto de fotos se recomprimieron con la calidad más baja cuyo PSNR contra el original es igual o mejor que el del archivo anterior. Las dimensiones mostradas no cambian.
+- **Precarga de Nunito**, la fuente del cuerpo, que el navegador solo descubría al leer el CSS.
+- **Valores del Figma restaurados:** nombre y chevron del grupo abierto, color del icono en hover, subtítulo y título de sección, color del placeholder, velo del hero (se quita), ancho de las cards en móvil (360 px), color del borde del pie y solape del popover (9 px).
+
+### Comprobado y sin cambios
+
+- Teclado: 52 paradas de tabulación sin trampas, el foco siempre es visible (anillo de dos tonos, de 9,35:1 a 10,02:1) y nunca queda tapado.
+- Reflujo a 320 y 256 px sin scroll horizontal, también con el menú, el cajón y el desglose abiertos.
+- Tamaño de los objetivos: nada por debajo de 24 px, salvo los campos de precio (152 × 20 px), que cumplen por separación.
+- Con el tamaño de fuente por defecto del navegador al 200 % (32 px) no hay scroll horizontal y la cabecera pasa al menú plegado, porque los breakpoints están en `em`.
+- Estructura: un `h1`, sin saltos de nivel, landmarks correctos, sin `id` duplicados y todas las imágenes con `alt`.
+- Estados deshabilitados de los botones (2,3:1): exentos por WCAG 1.4.3, y no aparecen en la home.
+
+### Incumplimientos del diseño
+
+Valores que dicta el Figma, no se modifican y llevan un comentario `A11Y-WARNING` justo encima de la declaración (se buscan con ese texto):
+
+| Criterio                           | Dónde (archivo)                                                       | Valor del Figma                                     | Mínimo | Valor propuesto                                                                                 |
+| ---------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------- | ------ | ----------------------------------------------------------------------------------------------- |
+| WCAG 1.4.3 (contraste)             | Nombre del grupo de filtros abierto · `brand/_semantic.scss`          | `#b85c28` sobre crema, 4,26:1                       | 4,5:1  | `#b25927` (4,50:1)                                                                              |
+| WCAG 1.4.3 (contraste)             | Subtítulo de sección · `brand/_own.scss`                              | `#6b7d8d` sobre blanco, 4,25:1                      | 4,5:1  | `#786f78` (4,83:1)                                                                              |
+| WCAG 1.4.3 (contraste)             | Placeholder del campo de precio · `brand/components/_text-input.scss` | `#817781` sobre blanco, 4,30:1                      | 4,5:1  | `#786f78` (4,83:1)                                                                              |
+| WCAG 1.4.3 (contraste)             | Subtítulo del hero sobre la foto · `brand/components/_hero.scss`      | Blanco sin velo, peor píxel 4,00:1 (1280 y 1440 px) | 4,5:1  | Velo negro del 10 % sobre la foto (`#0000001a`)                                                 |
+| WCAG 1.4.11 (contraste no textual) | Relleno de la casilla marcada · `brand/components/_checkbox.scss`     | `#ff8f50` sobre crema, 2,11:1                       | 3:1    | Relleno `#b85c28` (4,26:1) con la marca en blanco (4,57:1)                                      |
+| WCAG 1.4.11 (contraste no textual) | Icono de las flechas del carrusel · `brand/components/_slider.scss`   | Blanco sobre el 32 % de morado, 1,80:1              | 3:1    | Fondo al 56 % de `primary-700` (3,05:1) o icono con `$color-icon-primary-dark-default` (5,55:1) |
+
+La casilla marcada sí queda identificada por su borde (9,35:1) y por la marca, así que el aviso afecta solo al relleno. El título del hero cumple en el peor píxel de todos los anchos (3,64:1 como mínimo, con mínimo de 3:1 por ser texto grande), y el subtítulo del hero cumple a 1024 px y menos, donde también es texto grande.
+
+### No verificado
+
+- **Lector de pantalla (NVDA en Firefox y Chrome) y VoiceOver en Safari:** no verificado. La estructura se ha comprobado con axe-core, no escuchando la página.
+- **Firefox:** no verificado.
+- **Safari en macOS:** no verificado. En un iPhone se comprobó a mano la maquetación, el carrusel, el menú, los tooltips y los filtros; falta repetir el zoom del campo de precio y el bloqueo del scroll con los últimos cambios, y probar VoiceOver y «Reducir movimiento».
+- **Safari anterior a 17 (contrapartida de `scripting`):** probado solo en Chrome, quitándole al navegador la media query `scripting` y su soporte en `matchMedia`; no verificado en un Safari real.
+
+### Pendiente
+
+- `canonical`, `og:*` y `theme-color` (necesitan la URL pública del sitio).
+- El CSS (un solo archivo de 10 KB) bloquea el primer pintado unos 150 ms. Se podría insertar en línea la parte del primer pliegue; no se hizo para no mantener dos copias del CSS.
+- Lighthouse todavía recomienda recomprimir la foto de Bangkok (47 KB) y servirla a su tamaño de pantalla (360 × 256 px); solo existe a 528 px de ancho y bajarla más cambiaría su aspecto.
+
 ## Mejoras que haría con más tiempo
 
 - **Estado abierto del menú de navegación:** el Figma no lo dibuja. Hoy se muestran las mismas pestañas y el botón "Reserva" apilados bajo la barra, sin diseño propio; falta que diseño defina su aspecto (fondo, separación, marcador de la pestaña activa) para sustituir esta versión mínima.
-- **Contraste de las flechas del carrusel:** el icono blanco queda a 1,81:1 sobre el fondo de Brand (el 32 % de morado sobre blanco), por debajo del 3:1 que exige WCAG 1.4.11. Hay dos soluciones: subir la opacidad del fondo al 56 % (icono a 3,05:1) o, manteniendo el fondo, pintar el icono con el morado de la marca (`$color-icon-primary-dark-default`, 5,55:1). El cambio está aislado en `src/styles/settings/brand/components/_slider.scss`.
-- **Fotos de las cards en móvil:** las tres fotos de las que se parte miden 528 × 376 px. En desktop y tablet equivalen a 2x, pero en móvil, donde la card mide 358 px, quedan algo blandas en pantallas 3x. Con exportaciones a 4x del diseño se generarían más anchos (716 y 1056 px) y se ampliaría el `srcset`.
+- **Incumplimientos de contraste del diseño:** hay seis valores del Figma que no cumplen WCAG y están marcados con `A11Y-WARNING`, con la propuesta que sí cumpliría (ver «Incumplimientos del diseño»). Los cambios están aislados en `src/styles/settings/brand/`.
+- **Fotos de las cards en móvil:** las tres fotos de las que se parte miden 528 × 376 px. En desktop y tablet equivalen a 2x, pero en móvil, donde la card mide 360 px, quedan algo blandas en pantallas 3x. Con exportaciones a 4x del diseño se generarían más anchos (716 y 1056 px) y se ampliaría el `srcset`.
 - **Filtrado real de las cards:** el diseño no define cómo se aplican los filtros ni sus resultados. Hoy los controles son un formulario sin efecto; faltaría decidir el comportamiento (filtrar al marcar o con un botón, orden y estado vacío) y conectarlo con las cards.
 - **Contenido de ejemplo de los filtros:** los destinos, los alojamientos, las 21 aventuras y los tooltips son inventados para que el panel funcione; hay que sustituirlos por los reales.
 - **Cajón de filtros sin animación:** el diseño no dibuja la transición, así que el cajón aparece sin movimiento. Si se añade una entrada, habría que respetar prefers-reduced-motion.
