@@ -66,11 +66,9 @@ $focus-gap-link: var(--space-xs);
 }
 
 // Para enlaces cuya caja es más alta que su contenido (el logo, «Ver 21 más»): anillo en forma de
-// píldora alrededor del contenido, centrado y con la altura $height del contenido. Separación
-// $focus-gap-link por los cuatro lados; con $gap-y menor, el anillo queda más bajo y por los lados
-// conserva $focus-gap-link (para cuando arriba o abajo hay otro elemento pegado). Se incluye dentro
-// de :focus-visible; el área de clic no cambia.
-@mixin focus-ring-pill($height, $gap-y: $focus-gap-link) {
+// píldora alrededor del contenido, a $focus-gap-link, centrado y con la altura $height del
+// contenido. Se incluye dentro de :focus-visible; el área de clic no cambia.
+@mixin focus-ring-pill($height) {
   position: relative;
   outline: none;
   box-shadow: none;
@@ -79,12 +77,35 @@ $focus-gap-link: var(--space-xs);
     content: '';
     position: absolute;
     inset-block-start: 50%;
-    inset-inline: calc(-1 * ($focus-gap-link - $gap-y));
+    inset-inline: 0;
     height: $height;
     border-radius: var(--radius-control);
     pointer-events: none;
     translate: 0 -50%;
 
-    @include focus-ring($gap-y);
+    @include focus-ring($focus-gap-link);
+  }
+}
+
+// Para los enlaces de texto sobre fondo claro («Ver desglose», «Ver 21 más», «Ver menos»): una píldora
+// solo de contorno, sin el halo blanco, a $focus-gap-link del contenido y con un trazo más de aire por
+// cada lado en horizontal, donde el texto queda más justo que en vertical. $height es la altura del
+// contenido. Se incluye dentro de :focus-visible; el área de clic no cambia.
+@mixin focus-ring-link-pill($height) {
+  position: relative;
+  outline: none;
+  box-shadow: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline: calc(-1 * var(--border-width-strong));
+    height: $height;
+    border-radius: var(--radius-control);
+    outline: var(--border-width-strong) solid $focus-ring-color;
+    outline-offset: $focus-gap-link;
+    pointer-events: none;
+    translate: 0 -50%;
   }
 }

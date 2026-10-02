@@ -106,7 +106,7 @@
 
   // El botón mide 48 px de alto y el texto, una línea: el anillo va en píldora alrededor del texto.
   &:focus-visible {
-    @include focus-ring-pill(1lh);
+    @include focus-ring-link-pill(1lh);
   }
 }
 
