@@ -4,6 +4,9 @@
 
 $form-checkbox-box-background-default: $color-background-white-default;
 $form-checkbox-box-background-hover: $color-background-white-default;
+
+// A11Y-WARNING [WCAG 1.4.11] Contraste 2,11:1 del relleno de la casilla marcada sobre el crema del panel (mínimo 3:1).
+// Valor del Figma, no se modifica. Propuesta: relleno #b85c28 (4,26:1) con la marca en blanco (4,57:1).
 $form-checkbox-box-background-selected: $color-background-secondary-medium-default;
 $form-checkbox-box-background-selected-hover: $color-background-secondary-medium-hover;
 $form-checkbox-box-border-default: $color-border-primary-dark-default;
