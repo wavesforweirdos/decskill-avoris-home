@@ -176,6 +176,12 @@ axe-core: antes, 0 violaciones en los 15 estados. Después, una sola regla (`col
 - **`robots.txt`** real en `public/`.
 - **Imágenes.** Un móvil de hasta 430 px descarga un recorte exacto de lo que se ve del hero (`hero-mobile-430` y `hero-mobile-860`, 5 y 15 KB) en lugar del recorte de 744 o 1488 px (18 y 46 KB). El resto de fotos se recomprimieron con la calidad más baja cuyo PSNR contra el original es igual o mejor que el del archivo anterior. Las dimensiones mostradas no cambian.
 - **Precarga de Nunito**, la fuente del cuerpo, que el navegador solo descubría al leer el CSS.
+- **Anillo de foco (WCAG 2.4.7, 1.4.11).** Se revisó el anillo de los 19 tipos de control enfocable, a 1280 y 390 px y dentro del cajón y del desglose, y se ajustó sin cambiar los tokens (`$focus-ring-color` y `$focus-ring-halo`) ni el aspecto sin foco:
+  - **Tooltip:** el anillo es un círculo ceñido al icono (antes un cuadrado de 24 px) y el botón se eleva sobre la burbuja, que le tapaba el borde superior.
+  - **Casilla:** el anillo rodea la caja visible de 18 px, a 1 px y con sus esquinas, y no el `input` de 24 px. Hacia dentro tapaba la marca y casi todo el relleno naranja; el mixin `focus-ring` recibe la separación como parámetro (`$gap`, 2 px por defecto).
+  - **Sobre la foto del hero (flechas y botón):** los mismos dos tonos en orden inverso, blanco fuera y morado dentro (mixins `focus-ring-on-photo` y `focus-ring-inset-on-photo`). Antes el morado exterior daba entre 1,0 y 1,8:1 contra la foto oscura; ahora el blanco da 3,5:1 o más y 10,02:1 contra el morado. Las flechas lo dibujan hacia dentro porque tocan el borde de la ventana y se cortaban.
+  - **Paneles con scroll:** `scroll-margin-block` de 4 px en los controles, para que el filtro o el cajón no corten el anillo al llegar con Tab (9 recortes antes, ninguno después).
+  - En alto contraste de Windows el anillo sigue dibujándose (comprobado con `forced-colors: active` en Chrome; sin NVDA ni Windows real).
 - **Valores del Figma restaurados:** nombre y chevron del grupo abierto, color del icono en hover, subtítulo y título de sección, color del placeholder, velo del hero (se quita), ancho de las cards en móvil (360 px), color del borde del pie y solape del popover (9 px).
 
 ### Comprobado y sin cambios
