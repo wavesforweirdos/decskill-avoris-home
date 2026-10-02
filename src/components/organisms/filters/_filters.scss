@@ -25,6 +25,18 @@
     place-self: start stretch;
     width: auto;
     margin-block-start: calc(var(--space-xl) + var(--space-lg));
+
+    // Fijo al desplazar la página: se queda a 24 px del borde superior mientras se ven las cards y se
+    // detiene al acabar su fila, sin pisar el pie. Si no cabe en la pantalla (mide 896 px, y más con
+    // los grupos abiertos), tiene alto máximo y scroll interno para que nada quede inalcanzable.
+    position: sticky;
+    inset-block-start: var(--space-xl);
+    max-height: calc(100vh - 2 * var(--space-xl));
+    max-height: calc(100dvh - 2 * var(--space-xl));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    @include scrollbar-thin;
   }
 }
 
