@@ -3,6 +3,8 @@
 // Qué modo toca lo dice el CSS con --price-popover-modal, así el punto de corte no se repite aquí.
 // Sin JavaScript el botón "Ver desglose" queda oculto (hidden) y el desglose no se ofrece.
 
+import { lockScroll, unlockScroll } from '../../../scripts/scroll-lock';
+
 const MODE_PROPERTY = '--price-popover-modal';
 
 interface Breakdown {
@@ -38,7 +40,7 @@ export function initBreakdowns(): void {
       return;
     }
 
-    const { dialog, trigger } = current;
+    const { dialog, trigger, modal } = current;
 
     // Se limpia antes de cerrar para que el evento "close" del dialog no vuelva a entrar aquí.
     current = undefined;
@@ -47,10 +49,17 @@ export function initBreakdowns(): void {
       dialog.close();
     }
 
+    // El modal bloqueaba el scroll de la página.
+    if (modal) {
+      unlockScroll();
+    }
+
     trigger.setAttribute('aria-expanded', 'false');
 
+    // Tras un modal la página vuelve a su sitio (unlockScroll) y el botón estaba a la vista: no hace falta
+    // desplazar. Con el popover no modal sí puede hacer falta (la página no se bloquea).
     if (returnFocus) {
-      trigger.focus();
+      trigger.focus({ preventScroll: modal });
     }
   };
 
@@ -61,6 +70,7 @@ export function initBreakdowns(): void {
 
     if (modal) {
       // El navegador mueve el foco al primer elemento (el botón de cerrar) y lo mantiene dentro.
+      lockScroll();
       item.dialog.showModal();
     } else {
       item.dialog.show();

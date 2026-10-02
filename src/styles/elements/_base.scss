@@ -15,15 +15,21 @@ html {
 
 // Destino del skip link: se enfoca por código, no es interactivo y un anillo alrededor de toda la
 // página no ayuda a nadie (WCAG 2.4.7 se refiere a elementos operables con teclado).
-// Cajón de filtros abierto: la página de fondo no se desplaza. scrollbar-gutter conserva el hueco de la
-// barra de scroll para que el contenido no salte al desaparecer (Safari lo soporta desde la 18.2; en
-// versiones anteriores con barras clásicas puede notarse un salto de unos píxeles).
-html[data-scroll-locked] {
-  overflow: hidden;
-  scrollbar-gutter: stable;
-}
-
 [tabindex='-1']:focus-visible {
   outline: none;
   box-shadow: none;
+}
+
+// Modal abierto (cajón de filtros o desglose a pantalla completa): la página de fondo no se desplaza.
+// iOS Safari ignora overflow: hidden con el dedo, así que el body se fija en su sitio y se sube lo que
+// ya se había bajado (scripts/scroll-lock.ts). La barra de scroll de la página se conserva con
+// overflow-y: scroll: así, con barras clásicas, el contenido no cambia de ancho ni salta al bloquear.
+html[data-scroll-locked] {
+  overflow-y: scroll;
+}
+
+html[data-scroll-locked] body {
+  position: fixed;
+  inset-block-start: var(--scroll-lock-offset);
+  inset-inline: 0;
 }
