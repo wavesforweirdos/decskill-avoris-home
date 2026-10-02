@@ -41,15 +41,16 @@
     background-color: $form-checkbox-box-background-selected-hover;
   }
 
-  // Foco: el anillo va en la caja visible de 18 px y no en el input de 24, a 1 px de su borde y
-  // siguiendo sus esquinas. Hacia dentro taparía la marca de verificación y casi todo el relleno.
+  // Foco: el anillo va en la caja visible de 18 px y no en el input de 24, a 2 px de su borde (la
+  // separación estándar) y siguiendo sus esquinas. Hacia dentro taparía la marca de verificación y
+  // casi todo el relleno.
   &:focus-visible {
     outline: none;
     box-shadow: none;
   }
 
   &:focus-visible::before {
-    @include focus-ring(var(--border-width));
+    @include focus-ring;
   }
 
   // Marca de verificación, oculta mientras no está marcado. Mide 16 px dentro de la caja de 18: sin
