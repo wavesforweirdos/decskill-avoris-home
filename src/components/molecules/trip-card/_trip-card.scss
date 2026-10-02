@@ -138,22 +138,10 @@
     color: $card-breakdown-foreground-hover;
   }
 
-  // El botón mide 24 px de alto y el contenido 16: el anillo va en un pseudo-elemento del tamaño del
-  // contenido, en forma de píldora. El área de clic no cambia.
+  // Con el foco se resalta el chevron, no el enlace entero. Entre la etiqueta y el chevron no hay
+  // separación, así que el anillo va sin hueco (gap 0) para invadir lo mínimo la última letra.
   &:focus-visible {
-    position: relative;
-    outline: none;
-    box-shadow: none;
-
-    &::after {
-      content: '';
-      position: absolute;
-      inset: calc((var(--size-target-min) - var(--size-icon-sm)) / 2) 0;
-      border-radius: var(--radius-control);
-      pointer-events: none;
-
-      @include focus-ring($focus-gap-link);
-    }
+    @include focus-ring-trailing-icon(var(--size-icon-sm), 0);
   }
 }
 

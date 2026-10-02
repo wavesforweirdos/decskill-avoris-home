@@ -39,3 +39,29 @@ $focus-gap-link: var(--space-xs);
   outline-offset: calc(-1 * var(--border-width-strong));
   box-shadow: inset 0 0 0 calc(2 * var(--border-width-strong)) $focus-ring-color;
 }
+
+// Para controles cuyo indicador de foco debe ser el icono del final (el chevron de «Ver desglose» y
+// el de los grupos de filtros): anillo circular sobre ese icono. El icono es un elemento con máscara,
+// que recortaría su propio anillo, así que el anillo es un pseudo-elemento del control con el
+// tamaño del icono, a su altura y pegado al borde final. Se incluye dentro de :focus-visible. El
+// tamaño, el padding y el área de clic del control no cambian. $gap es la separación del anillo
+// (2 px por defecto).
+@mixin focus-ring-trailing-icon($size, $gap: var(--border-width-strong)) {
+  position: relative;
+  outline: none;
+  box-shadow: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: 0;
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+    pointer-events: none;
+    translate: 0 -50%;
+
+    @include focus-ring($gap);
+  }
+}

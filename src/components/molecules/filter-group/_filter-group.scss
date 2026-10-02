@@ -37,27 +37,9 @@
     --filter-group-chevron: #{$filters-chevron-hover};
   }
 
-  // Con el foco se resalta el chevron, no toda la fila. El chevron es un icono con máscara, que
-  // recortaría su propio anillo: el anillo es un pseudo-elemento del tamaño del chevron, a su altura
-  // y pegado al borde final. El área de clic no cambia.
+  // Con el foco se resalta el chevron, no toda la fila.
   &:focus-visible {
-    position: relative;
-    outline: none;
-    box-shadow: none;
-
-    &::after {
-      content: '';
-      position: absolute;
-      inset-block-start: 50%;
-      inset-inline-end: 0;
-      width: var(--size-icon-md);
-      height: var(--size-icon-md);
-      border-radius: 50%;
-      pointer-events: none;
-      translate: 0 -50%;
-
-      @include focus-ring;
-    }
+    @include focus-ring-trailing-icon(var(--size-icon-md));
   }
 }
 
