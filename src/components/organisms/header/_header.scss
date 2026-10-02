@@ -49,11 +49,36 @@
 }
 
 // El logo mide 24 px en móvil y 32 desde 744 (el .logo base ya mide 32).
-.header__logo {
-  height: var(--size-icon-md);
+.header__brand {
+  --logo-height: var(--size-icon-md);
 
   @include mq(tablet-small) {
-    height: var(--size-icon-lg);
+    --logo-height: var(--size-icon-lg);
+  }
+}
+
+.header__logo {
+  height: var(--logo-height);
+}
+
+// El enlace del logo es más alto que la imagen desde 744 px: el anillo, en forma de píldora, va en un
+// pseudo-elemento del tamaño de la imagen, centrado. El área de clic no cambia.
+.header__brand:focus-visible {
+  position: relative;
+  outline: none;
+  box-shadow: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline: 0;
+    height: var(--logo-height);
+    border-radius: var(--radius-control);
+    pointer-events: none;
+    translate: 0 -50%;
+
+    @include focus-ring($focus-gap-link);
   }
 }
 

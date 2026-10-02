@@ -1,5 +1,9 @@
 @use '../settings/brand' as *;
 
+// Separación del anillo de los enlaces de texto o imagen (pestañas, logo, "Ver desglose"). El anillo
+// va en forma de píldora alrededor del contenido visible, con la misma separación por los cuatro lados.
+$focus-gap-link: var(--space-xs);
+
 // Anillo de foco de dos tonos: el halo claro separa el anillo del elemento, así se ve tanto
 // sobre fondos claros como sobre la imagen oscura del hero. outline sigue el border-radius. $gap es la
 // separación entre el elemento y el anillo (y el ancho del halo): 2 px, o menos en controles
