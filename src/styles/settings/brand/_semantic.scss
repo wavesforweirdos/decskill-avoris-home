@@ -27,6 +27,10 @@ $color-foreground-title-default: $primary-700;
 $color-foreground-black-default: $basic-800;
 $color-foreground-medium-light-default: $basic-500;
 $color-foreground-medium-light-hover: $basic-600;
+$color-foreground-secondary-dark-default: $secondary-650; // Brand: secondary-600; se usa el ajuste AA para texto
+$color-foreground-secondary-dark-hover: $secondary-700;
+$color-foreground-link-default: $primary-700;
+$color-foreground-link-hover: $primary-800;
 $color-foreground-primary-dark-default: $primary-700;
 $color-foreground-primary-dark-hover: $primary-800;
 $color-foreground-on-primary-dark-default: $basic-000-white;
@@ -38,10 +42,12 @@ $color-foreground-on-secondary-medium-disabled: $basic-700;
 $color-border-white-default: $basic-000-white;
 $color-border-secondary-medium-default: $secondary-400;
 $color-border-medium-default: $basic-100;
+$color-divisor-light: $basic-100;
 $color-border-medium-hover: $basic-200;
 $color-border-primary-dark-default: $primary-700;
 $color-border-primary-dark-hover: $primary-800;
 $color-border-primary-dark-disabled: $basic-500;
+$color-icon-secondary-dark-default: $secondary-650; // Brand: secondary-600; se usa el ajuste AA
 $color-icon-white-default: $basic-000-white;
 $color-icon-white-hover: $basic-000-white;
 $color-icon-black-default: $basic-800;

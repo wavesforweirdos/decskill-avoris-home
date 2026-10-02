@@ -40,10 +40,12 @@
     background-color: $form-checkbox-box-background-selected-hover;
   }
 
-  // Marca de verificación, oculta mientras no está marcado.
+  // Marca de verificación, oculta mientras no está marcado. Mide 16 px dentro de la caja de 18: sin
+  // place-self el grid la pegaría arriba a la izquierda, a 1 px del centro.
   &::after {
     content: '';
     grid-area: 1 / 1;
+    place-self: center;
     width: var(--size-icon-sm);
     height: var(--size-icon-sm);
     background-color: $form-checkbox-check-icon-default;

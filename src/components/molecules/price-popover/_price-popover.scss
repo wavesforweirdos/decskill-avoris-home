@@ -24,6 +24,8 @@
   color: $overlay-text-default;
   overflow: auto;
 
+  @include scrollbar-thin;
+
   // El navegador oculta el dialog cerrado; solo hay que dar el display al abierto.
   &[open] {
     display: flex;

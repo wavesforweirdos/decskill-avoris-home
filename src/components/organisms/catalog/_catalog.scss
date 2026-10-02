@@ -32,24 +32,34 @@
   }
 }
 
-// "Ver filtros": centrado hasta 1024 px, a la izquierda de las cards desde ahí, y oculto desde 1280,
-// donde los filtros ocupan su columna. Todavía no abre nada (se conecta en el PR de filtros).
+// "Ver filtros": abre el cajón de filtros, que existe por debajo de 1280 px. Solo se muestra con
+// JavaScript (scripting: enabled); sin él, o en navegadores que no conocen esa media query, el
+// panel va apilado encima de los resultados y el botón sobraría. Centrado hasta 1024 px y a la
+// izquierda de las cards desde ahí. Desde 1280 los filtros ocupan su columna y el botón no se ve.
 .catalog__filters-toggle {
+  display: none;
   grid-column: 1 / -1;
   justify-self: center;
 
   @include mq(tablet-large) {
     justify-self: start;
   }
+}
 
-  @include mq(desktop) {
-    display: none;
+@include mq-below(desktop) {
+  @media (scripting: enabled) {
+    .catalog__filters-toggle {
+      display: inline-flex;
+    }
   }
 }
 
+// align-self: start evita que el contenedor se estire hasta la altura del panel de filtros (que crece
+// al abrir los grupos): sin eso, las filas del grid se estirarían y las cards se separarían.
 .catalog__groups {
   display: grid;
   grid-column: 1 / -1;
+  align-self: start;
   grid-template-columns: subgrid;
   row-gap: var(--space-xl);
 

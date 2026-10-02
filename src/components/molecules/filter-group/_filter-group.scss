@@ -1,0 +1,68 @@
+@use 'styles/settings/brand' as *;
+
+// Grupo plegable del panel de filtros. Es un <details> nativo: se abre y se cierra sin JavaScript,
+// el teclado y el estado expandido son accesibles de serie y el buscador del navegador abre el
+// grupo que contiene el texto. El estado vive en el atributo open, así que se conserva cuando el
+// formulario cambia de sitio.
+.filter-group {
+  --filter-group-name: #{$filters-filter-name-text-default};
+  --filter-group-icon: #{$filters-icon-default};
+  --filter-group-chevron: #{$filters-chevron-default};
+}
+
+.filter-group[open] {
+  --filter-group-name: #{$filters-filter-name-text-open};
+  --filter-group-icon: #{$filters-icon-open};
+  --filter-group-chevron: #{$filters-chevron-open};
+}
+
+.filter-group__summary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-height: var(--size-control-base);
+  cursor: pointer;
+  list-style: none;
+
+  // Safari pinta su propio triángulo aparte de list-style.
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &:hover {
+    --filter-group-name: #{$filters-filter-name-text-hover};
+    --filter-group-icon: #{$filters-icon-hover};
+    --filter-group-chevron: #{$filters-chevron-hover};
+  }
+}
+
+.filter-group[open] > .filter-group__summary:hover {
+  --filter-group-name: #{$filters-filter-name-text-open-hover};
+  --filter-group-icon: #{$filters-icon-open-hover};
+  --filter-group-chevron: #{$filters-chevron-open-hover};
+}
+
+.filter-group__icon {
+  color: var(--filter-group-icon);
+}
+
+// Abierto: negrita y el color del estado abierto.
+.filter-group__name {
+  flex: 1;
+  color: var(--filter-group-name);
+  font: var(--text-nav);
+}
+
+.filter-group[open] > .filter-group__summary .filter-group__name {
+  font: var(--text-nav-active);
+}
+
+// Un solo chevron: apunta a la derecha cerrado y, girado 90°, hacia abajo abierto.
+.filter-group__chevron {
+  color: var(--filter-group-chevron);
+}
+
+.filter-group[open] > .filter-group__summary .filter-group__chevron {
+  rotate: 90deg;
+}

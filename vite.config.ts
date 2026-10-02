@@ -1,8 +1,15 @@
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import handlebars from 'vite-plugin-handlebars';
 
 const fromRoot = (path: string): string => resolve(import.meta.dirname, path);
+
+// Contenido de ejemplo de los filtros: las plantillas lo recorren con {{#each filters.…}}.
+const filters = JSON.parse(readFileSync(fromRoot('src/data/filters.json'), 'utf8')) as Record<
+  string,
+  unknown[]
+>;
 
 export default defineConfig({
   // GitHub Pages sirve el sitio bajo /<repo>/. El workflow de deploy fija BASE_PATH; en local es "/".
@@ -26,6 +33,7 @@ export default defineConfig({
     // al directorio, p. ej. {{> atoms/button/button}} o {{> home/home}}.
     handlebars({
       partialDirectory: [fromRoot('src/components'), fromRoot('src/pages')],
+      context: { filters },
     }),
   ],
 });

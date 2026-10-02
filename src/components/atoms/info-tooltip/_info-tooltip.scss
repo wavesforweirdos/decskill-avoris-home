@@ -22,13 +22,17 @@
   cursor: pointer;
 }
 
-// Va encima del icono. El triángulo (::after) cubre el hueco entre ambos, así el puntero puede
-// pasar de uno a otro sin que el tooltip se cierre (WCAG 1.4.13).
+// Va encima del icono, de una línea si cabe (como el "Lorem ipsum" del diseño) y, si el texto es más
+// largo, en varias con un ancho máximo para que no se salga del panel. El triángulo (::after) cubre
+// el hueco entre ambos, así el puntero puede pasar de uno a otro sin que el tooltip se cierre
+// (WCAG 1.4.13).
 .info-tooltip__bubble {
   position: absolute;
   bottom: calc(100% + var(--space-3xs));
   left: 50%;
   z-index: var(--z-tooltip);
+  width: max-content;
+  max-width: var(--size-tooltip-max);
   padding-block: var(--space-xs);
   padding-inline: var(--space-tooltip-x);
   translate: -50% 0;
@@ -37,7 +41,6 @@
   box-shadow: var(--shadow-raised);
   color: $overlay-text-default;
   font: var(--text-tooltip);
-  white-space: nowrap;
   visibility: hidden;
 
   &::after {
