@@ -4,8 +4,10 @@
 // SIN EQUIVALENTE EN FIGMA. Variables propias del proyecto, con nombre propio. Las usan los
 // componentes igual que las de components/.
 
-$section-title-default: $color-foreground-on-light-default; // el Figma usa #2F222F, que no está en la paleta
-$section-subtitle-default: $basic-550; // el Figma usa #6B7D8D (4,25:1 sobre blanco): se usa el gris de la paleta que cumple AA
+$section-title-default: #2f222f; // valor del Figma, que no está en la paleta
+// A11Y-WARNING [WCAG 1.4.3] Contraste 4,25:1 (mínimo 4,5:1) del subtítulo de sección sobre blanco.
+// Valor del Figma, no se modifica. Propuesta: #786f78 (4,83:1).
+$section-subtitle-default: #6b7d8d; // fuera de la paleta
 $circuit-card-grid-title-default: $color-foreground-on-light-default; // título de grupo ("Asia")
 $info-tooltip-icon-default: $color-icon-black-default; // el Figma usa color/icon/black-default
 $page-background: $color-background-white-default;
@@ -15,4 +17,4 @@ $focus-ring-halo: $basic-000-white;
 $filters-background: $color-background-secondary-light-default; // Brand no define el fondo del panel de filtros; el Figma usa el crema
 $scrollbar-thumb: $basic-500; // tirador de las barras de scroll internas; Brand no las define. 4,0:1 sobre el crema y 4,3:1 sobre blanco
 $slider-control-underlay: $color-background-white-default; // relleno blanco opaco que el Figma pone bajo el 32 % de la flecha
-$footer-border-top-default: $color-border-medium-default; // Brand no define borde del footer; sí lo dibuja el Figma
+$footer-border-top-default: #e2d7dd; // Brand no define borde del footer; el Figma lo dibuja con este color, fuera de la paleta

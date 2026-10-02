@@ -10,8 +10,8 @@
 .hero {
   display: grid;
   grid-template-columns: var(--size-control-sm) 1fr var(--size-control-sm);
-  grid-template-rows: minmax(0, 1fr) auto;
-  height: var(--size-hero);
+  grid-template-rows: minmax(min-content, 1fr) auto;
+  min-height: var(--size-hero);
 }
 
 // La pista ocupa toda la caja, por debajo de las flechas y de los puntos.

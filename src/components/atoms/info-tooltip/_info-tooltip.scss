@@ -1,4 +1,5 @@
 @use 'styles/settings/brand' as *;
+@use 'styles/tools' as *;
 
 // Icono de información con tooltip. Se muestra con hover y con foco por CSS; así funciona también
 // sin JavaScript. info-tooltip.ts añade el cierre con Escape.
@@ -17,11 +18,33 @@
   margin-inline: calc((var(--size-icon-sm) - var(--size-target-min)) / 2);
   padding: 0;
   border: 0;
+  border-radius: 50%;
   background: transparent;
   color: $info-tooltip-icon-default;
   cursor: pointer;
+
+  // El anillo va en un círculo del tamaño del icono (no en el botón de 24 px), con la separación
+  // de siempre, así queda ceñido al icono. La burbuja, cuando está abierta, queda por encima y tapa
+  // parte del anillo, no todo (WCAG 2.4.11).
+  &:focus-visible {
+    position: relative;
+    outline: none;
+    box-shadow: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: calc((var(--size-target-min) - var(--size-icon-sm)) / 2);
+      border-radius: 50%;
+      pointer-events: none;
+
+      @include focus-ring;
+    }
+  }
 }
 
+// Oculta con display: none y no con visibility: una burbuja oculta seguiría contando para el
+// desbordamiento del contenedor y, en un panel con scroll, sacaría una barra horizontal.
 // Va encima del icono, de una línea si cabe (como el "Lorem ipsum" del diseño) y, si el texto es más
 // largo, en varias con un ancho máximo para que no se salga del panel. El triángulo (::after) cubre
 // el hueco entre ambos, así el puntero puede pasar de uno a otro sin que el tooltip se cierre
@@ -41,7 +64,7 @@
   box-shadow: var(--shadow-raised);
   color: $overlay-text-default;
   font: var(--text-tooltip);
-  visibility: hidden;
+  display: none;
 
   &::after {
     content: '';
@@ -55,5 +78,5 @@
 }
 
 .info-tooltip:is(:hover, :focus-within):not([data-dismissed]) .info-tooltip__bubble {
-  visibility: visible;
+  display: block;
 }

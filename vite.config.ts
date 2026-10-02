@@ -34,6 +34,10 @@ export default defineConfig({
     handlebars({
       partialDirectory: [fromRoot('src/components'), fromRoot('src/pages')],
       context: { filters },
+      helpers: {
+        // Une textos y valores: (concat "Reservar: " title) da un nombre accesible compuesto.
+        concat: (...args: unknown[]) => args.slice(0, -1).map(String).join(''),
+      },
     }),
   ],
 });

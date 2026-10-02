@@ -4,10 +4,10 @@
 // Navbar. Flex con justify-content: space-between: logo a la izquierda, pestañas en el hueco y
 // "Reserva" a la derecha (desde 1024, con .header__menu en display: contents para que sean hijos
 // directos del flex). Por debajo de 1024 la navegación pasa a una columna bajo la barra.
-// Mejora progresiva con @media (scripting: enabled): solo si hay JavaScript el menú se pliega,
-// aparece el botón y el panel abierto flota sobre la página sin desplazarla, desde el primer
-// pintado y sin saltos. Sin JavaScript (o en navegadores que no
-// conocen la media query, como Safari < 17) la navegación se queda visible en flujo.
+// Mejora progresiva (mixin js-enhanced): solo si hay JavaScript el menú se pliega, aparece el botón
+// y el panel abierto flota sobre la página sin desplazarla, desde el primer pintado y sin saltos.
+// Sin JavaScript, o si su módulo no carga, la navegación se queda visible en flujo. En Safari < 17,
+// que no conoce la media query scripting, main.ts activa los mismos estilos al cargar.
 .header {
   position: relative;
   display: flex;
@@ -49,12 +49,22 @@
 }
 
 // El logo mide 24 px en móvil y 32 desde 744 (el .logo base ya mide 32).
-.header__logo {
-  height: var(--size-icon-md);
+.header__brand {
+  --logo-height: var(--size-icon-md);
 
   @include mq(tablet-small) {
-    height: var(--size-icon-lg);
+    --logo-height: var(--size-icon-lg);
   }
+}
+
+.header__logo {
+  height: var(--logo-height);
+}
+
+// El enlace del logo es más alto que la imagen desde 744 px: el anillo va en forma de píldora
+// alrededor de la imagen.
+.header__brand:focus-visible {
+  @include focus-ring-pill(var(--logo-height));
 }
 
 // Botón de menú (burger). Oculto por defecto: sin JavaScript no tendría función.
@@ -104,7 +114,7 @@
 }
 
 @include mq-below(tablet-large) {
-  @media (scripting: enabled) {
+  @include js-enhanced {
     .header__toggle {
       display: inline-flex;
     }

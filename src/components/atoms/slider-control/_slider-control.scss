@@ -1,4 +1,5 @@
 @use 'styles/settings/brand' as *;
+@use 'styles/tools' as *;
 
 // Flecha anterior/siguiente del carrusel del hero. Solo lleva icono, así que el botón lleva aria-label.
 .slider-control {
@@ -29,5 +30,10 @@
     background-color: $button-slider-navigation-background-hover;
     background-image: none;
     color: $button-slider-navigation-icon-hover;
+  }
+
+  // Va sobre la foto y pegado al borde de la ventana: anillo hacia dentro y con los tonos invertidos.
+  &:focus-visible {
+    @include focus-ring-inset-on-photo;
   }
 }

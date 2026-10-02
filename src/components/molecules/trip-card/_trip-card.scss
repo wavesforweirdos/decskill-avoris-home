@@ -137,6 +137,19 @@
   &:hover {
     color: $card-breakdown-foreground-hover;
   }
+
+  // Píldora de contorno alrededor del enlace. Desde 744 px el precio queda pegado encima: la caja del
+  // anillo se acorta para que por arriba y por abajo quede a 2 px (24 px de alto, la altura del propio
+  // botón) y no pise las cifras. En móvil, donde el precio no está encima, lleva los 6 px completos.
+  &:focus-visible {
+    @include focus-ring-link-pill(var(--size-icon-sm));
+
+    @include mq(tablet-small) {
+      &::after {
+        height: calc(var(--size-icon-sm) - 2 * ($focus-gap-link - var(--border-width-strong)));
+      }
+    }
+  }
 }
 
 .trip-card__breakdown-label {

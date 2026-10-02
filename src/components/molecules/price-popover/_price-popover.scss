@@ -43,7 +43,7 @@
 
     position: absolute;
     inset: auto;
-    inset-block-start: calc(100% - var(--space-sm));
+    inset-block-start: calc(100% - var(--space-sm) - var(--border-width));
     inset-inline-start: 50%;
     z-index: var(--z-popover);
     width: var(--size-popover);

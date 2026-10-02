@@ -1,11 +1,17 @@
 @use '../settings/brand' as *;
 
+// Separación del anillo de los enlaces de texto o imagen (pestañas, logo, "Ver desglose"). El anillo
+// va en forma de píldora alrededor del contenido visible, con la misma separación por los cuatro lados.
+$focus-gap-link: var(--space-xs);
+
 // Anillo de foco de dos tonos: el halo claro separa el anillo del elemento, así se ve tanto
-// sobre fondos claros como sobre la imagen oscura del hero. outline sigue el border-radius.
-@mixin focus-ring {
+// sobre fondos claros como sobre la imagen oscura del hero. outline sigue el border-radius. $gap es la
+// separación entre el elemento y el anillo (y el ancho del halo): 2 px, o menos en controles
+// pequeños donde el anillo estándar quedaría lejos de lo que se ve.
+@mixin focus-ring($gap: var(--border-width-strong)) {
   outline: var(--border-width-strong) solid $focus-ring-color;
-  outline-offset: var(--border-width-strong);
-  box-shadow: 0 0 0 var(--border-width-strong) $focus-ring-halo;
+  outline-offset: $gap;
+  box-shadow: 0 0 0 $gap $focus-ring-halo;
 }
 
 // El mismo anillo hacia dentro, para elementos que tocan el borde de la página o de su contenedor
@@ -15,4 +21,91 @@
   outline: var(--border-width-strong) solid $focus-ring-color;
   outline-offset: calc(-1 * var(--border-width-strong));
   box-shadow: inset 0 0 0 calc(2 * var(--border-width-strong)) $focus-ring-halo;
+}
+
+// Sobre la foto del hero: los mismos dos tonos con el orden invertido, el blanco fuera y el morado
+// dentro. Sobre una foto oscura el morado exterior casi no se distingue (1,0 a 1,8:1) y el blanco
+// sí (7,5:1 o más); el morado queda entre el blanco y el control (4,4:1 o más).
+@mixin focus-ring-on-photo($gap: var(--border-width-strong)) {
+  outline: var(--border-width-strong) solid $focus-ring-halo;
+  outline-offset: $gap;
+  box-shadow: 0 0 0 $gap $focus-ring-color;
+}
+
+// Lo mismo hacia dentro, para los controles pegados al borde de la ventana (las flechas), donde el
+// anillo exterior se cortaría.
+@mixin focus-ring-inset-on-photo {
+  outline: var(--border-width-strong) solid $focus-ring-halo;
+  outline-offset: calc(-1 * var(--border-width-strong));
+  box-shadow: inset 0 0 0 calc(2 * var(--border-width-strong)) $focus-ring-color;
+}
+
+// Para controles cuyo indicador de foco debe ser el icono del final (el chevron de «Ver desglose» y
+// el de los grupos de filtros): anillo circular sobre ese icono. El icono es un elemento con máscara,
+// que recortaría su propio anillo, así que el anillo es un pseudo-elemento del control con el
+// tamaño del icono, a su altura y pegado al borde final. Se incluye dentro de :focus-visible. El
+// tamaño, el padding y el área de clic del control no cambian.
+@mixin focus-ring-trailing-icon($size) {
+  position: relative;
+  outline: none;
+  box-shadow: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: 0;
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+    pointer-events: none;
+    translate: 0 -50%;
+
+    @include focus-ring;
+  }
+}
+
+// Para enlaces cuya caja es más alta que su contenido (el logo, «Ver 21 más»): anillo en forma de
+// píldora alrededor del contenido, a $focus-gap-link, centrado y con la altura $height del
+// contenido. Se incluye dentro de :focus-visible; el área de clic no cambia.
+@mixin focus-ring-pill($height) {
+  position: relative;
+  outline: none;
+  box-shadow: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline: 0;
+    height: $height;
+    border-radius: var(--radius-control);
+    pointer-events: none;
+    translate: 0 -50%;
+
+    @include focus-ring($focus-gap-link);
+  }
+}
+
+// Para los enlaces de texto sobre fondo claro («Ver desglose», «Ver 21 más», «Ver menos»): una píldora
+// solo de contorno, sin el halo blanco, a $focus-gap-link del contenido y con un trazo más de aire por
+// cada lado en horizontal, donde el texto queda más justo que en vertical. $height es la altura del
+// contenido. Se incluye dentro de :focus-visible; el área de clic no cambia.
+@mixin focus-ring-link-pill($height) {
+  position: relative;
+  outline: none;
+  box-shadow: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline: calc(-1 * var(--border-width-strong));
+    height: $height;
+    border-radius: var(--radius-control);
+    outline: var(--border-width-strong) solid $focus-ring-color;
+    outline-offset: $focus-gap-link;
+    pointer-events: none;
+    translate: 0 -50%;
+  }
 }

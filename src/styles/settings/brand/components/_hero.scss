@@ -3,10 +3,7 @@
 // NIVEL 3 · COMPONENTE: hero (Figma: hero/…). Nombre de Figma cambiando la barra por un guion.
 
 $hero-title-default: $color-foreground-on-dark-default;
-$hero-subtitle-default: $color-foreground-on-dark-default;
 
-// Velo negro del 10 % sobre la foto, sin equivalente en Brand. El Figma tiene una capa negra
-// del 24 % sobre la imagen, pero está oculta en el diseño. Sin velo, el subtítulo blanco baja a
-// 4,13:1 en el peor píxel (AA pide 4,5:1 en texto normal); con este velo cumple. Es un hex con alpha
-// (0x1a = 10,2 %) porque en la paleta no hay negro.
-$hero-veil-default: #0000001a;
+// A11Y-WARNING [WCAG 1.4.3] Contraste 4,00:1 en el peor píxel a 1280 y 1440 px (mínimo 4,5:1 en texto normal).
+// Valor del Figma, no se modifica. Propuesta: velo negro del 10 % sobre la foto (#0000001a), que sube el peor píxel a unos 4,7:1.
+$hero-subtitle-default: $color-foreground-on-dark-default;

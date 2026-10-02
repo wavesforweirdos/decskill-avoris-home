@@ -5,7 +5,7 @@
 // - por debajo de 1280 px, el cajón: mueve el MISMO formulario al <dialog> y lo abre como modal, y
 //   lo devuelve al aside al cerrar, de modo que se conservan casillas, precios y grupos abiertos.
 
-const SCROLL_LOCK = 'data-scroll-locked';
+import { lockScroll, unlockScroll } from '../../../scripts/scroll-lock';
 
 function initMoreButtons(): void {
   for (const button of document.querySelectorAll<HTMLButtonElement>('.filter-more')) {
@@ -46,7 +46,7 @@ export function initFilters(): void {
 
   toggle.addEventListener('click', () => {
     dialog.append(form);
-    document.documentElement.setAttribute(SCROLL_LOCK, '');
+    lockScroll();
     // El navegador mueve el foco al primer elemento (el botón de cerrar) y lo mantiene dentro.
     dialog.showModal();
   });
@@ -64,11 +64,12 @@ export function initFilters(): void {
 
   dialog.addEventListener('close', () => {
     aside.append(form);
-    document.documentElement.removeAttribute(SCROLL_LOCK);
+    unlockScroll();
 
     // Si el cierre viene de pasar a 1280 px, el botón ya no está y no hay a dónde devolver el foco.
+    // preventScroll: unlockScroll ya devolvió la página a su sitio y el botón estaba a la vista.
     if (toggle.offsetParent !== null) {
-      toggle.focus();
+      toggle.focus({ preventScroll: true });
     }
   });
 

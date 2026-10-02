@@ -1,0 +1,17 @@
+// Mejora progresiva: estilos que solo valen si hay JavaScript y su módulo ha cargado.
+// @media (scripting: enabled) los aplica desde el primer pintado, sin saltos. Si el módulo no
+// llega a cargar (red, bloqueador), un script del <head> marca <html data-js-failed> y se quedan
+// sin efecto: la página queda en su versión sin JavaScript en vez de con botones muertos.
+// Safari < 17 no conoce la media query scripting: main.ts lo detecta y marca
+// <html data-scripting-fallback>, que aplica los mismos estilos (con un salto al cargar el módulo).
+@mixin js-enhanced {
+  @media (scripting: enabled) {
+    @at-root :root:not([data-js-failed]) {
+      @content;
+    }
+  }
+
+  @at-root :root[data-scripting-fallback] {
+    @content;
+  }
+}

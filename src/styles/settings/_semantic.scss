@@ -31,6 +31,9 @@
   // Espaciado de página: cambia con el breakpoint (valores de la home en el Figma).
   --space-gutter: var(--space-16);
   --space-section: var(--space-56);
+
+  // En móvil las cards sobresalen 1 px del margen: 360 px en 390, como en el Figma.
+  --space-card-bleed: var(--space-1);
   --space-section-header: var(--space-40);
   --space-navbar-x: var(--space-lg);
   --space-navbar-tabs: var(--space-lg);
@@ -56,7 +59,7 @@
   --size-filters-panel: var(--size-296);
   --size-filters-header: var(--size-80);
   --size-popover: var(--size-400);
-  --size-tooltip-max: var(--size-200);
+  --size-tooltip-max: var(--size-176);
   --size-tab-marker-width: var(--size-18);
   --size-tab-marker-height: var(--size-12);
   --size-dot: var(--size-10);
@@ -129,6 +132,8 @@
   --text-popover-total: var(--font-weight-700) var(--font-size-18) / var(--line-height-22)
     var(--font-body);
   --text-legal: var(--font-weight-700) var(--font-size-14) / var(--line-height-20) var(--font-body);
+  --text-field-value-ios: var(--font-weight-500) var(--font-size-16) / var(--line-height-20)
+    var(--font-body);
   --text-field-value: var(--font-weight-500) var(--font-size-14) / var(--line-height-20)
     var(--font-body);
 }

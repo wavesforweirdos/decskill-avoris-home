@@ -3,9 +3,8 @@
 
 // NIVEL 3 · COMPONENTE: slider-control y slider-dot (Figma: button/slider-navigation, indicator/slider).
 
-// Brand: primary-low-alpha (primary-700 al 32 %). Con el icono blanco da 1,81:1 sobre el relleno blanco
-// que dibuja el Figma debajo, por debajo del 3:1 de WCAG 1.4.11. Se respeta Brand y el cambio para
-// cumplirlo está aquí, aislado: ver «Mejoras que haría con más tiempo» del README.
+// A11Y-WARNING [WCAG 1.4.11] Contraste 1,80:1 del icono blanco de las flechas sobre el relleno de Brand (mínimo 3:1).
+// Valor del Figma, no se modifica. Propuesta: fondo al 56 % de primary-700 (3,05:1) o icono en $color-icon-primary-dark-default (5,55:1).
 $button-slider-navigation-background-default: $color-background-primary-low-alpha;
 $button-slider-navigation-background-hover: $primary-700;
 $button-slider-navigation-icon-default: $color-icon-white-default;

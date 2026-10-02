@@ -1,4 +1,5 @@
 @use 'styles/settings/brand' as *;
+@use 'styles/tools' as *;
 
 // Grupo plegable del panel de filtros. Es un <details> nativo: se abre y se cierra sin JavaScript,
 // el teclado y el estado expandido son accesibles de serie y el buscador del navegador abre el
@@ -34,6 +35,11 @@
     --filter-group-name: #{$filters-filter-name-text-hover};
     --filter-group-icon: #{$filters-icon-hover};
     --filter-group-chevron: #{$filters-chevron-hover};
+  }
+
+  // Con el foco se resalta el chevron, no toda la fila.
+  &:focus-visible {
+    @include focus-ring-trailing-icon(var(--size-icon-md));
   }
 }
 

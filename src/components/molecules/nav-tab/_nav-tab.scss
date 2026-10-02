@@ -11,7 +11,6 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: var(--space-tab-gap);
   min-height: var(--size-control-base);
   padding-inline: var(--space-tab-x);
   color: var(--nav-tab-fg);
@@ -23,16 +22,29 @@
     --nav-tab-icon: #{$tab-navbar-icon-hover};
   }
 
-  // El anillo de foco global va por fuera, y aquí la pestaña ocupa todo el alto de la barra y toca
-  // el borde de la página, donde se cortaría: se dibuja hacia dentro.
+  // La pestaña ocupa todo el alto de la barra y su anillo, a su alrededor, sobraría de altura y
+  // quedaría lejos del texto: se dibuja en el contenido (icono y texto), en forma de píldora. El
+  // área de clic y el layout no cambian.
   &:focus-visible {
-    @include focus-ring-inset;
+    outline: none;
+    box-shadow: none;
   }
 
   @include mq(tablet-large) {
     min-height: 0;
     margin-block-end: calc(-1 * var(--border-width));
   }
+}
+
+.nav-tab__content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-tab-gap);
+  border-radius: var(--radius-control);
+}
+
+.nav-tab:focus-visible .nav-tab__content {
+  @include focus-ring($focus-gap-link);
 }
 
 .nav-tab__icon {
