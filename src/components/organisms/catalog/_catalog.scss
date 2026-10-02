@@ -18,9 +18,11 @@
   grid-template-columns: minmax(0, var(--size-card-mobile));
   gap: var(--space-xl);
   justify-content: center;
+  margin-inline: calc(-1 * var(--space-card-bleed));
 
   @include mq(tablet-small) {
     grid-template-columns: repeat(2, var(--size-card));
+    margin-inline: 0;
   }
 
   @include mq(tablet-large) {

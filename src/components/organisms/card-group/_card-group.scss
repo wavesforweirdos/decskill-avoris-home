@@ -10,10 +10,10 @@
   row-gap: var(--space-lg);
 }
 
-// En móvil el título deja 16 px más que las cards, como en el Figma.
+// En móvil el título deja 17 px más que las cards (32 px del borde en 390), como en el Figma.
 .card-group__title {
   grid-column: 1 / -1;
-  padding-inline: var(--space-lg);
+  padding-inline: calc(var(--space-lg) + var(--space-card-bleed));
 
   @include mq(tablet-small) {
     padding-inline: 0;

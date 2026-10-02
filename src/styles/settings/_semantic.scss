@@ -31,6 +31,9 @@
   // Espaciado de página: cambia con el breakpoint (valores de la home en el Figma).
   --space-gutter: var(--space-16);
   --space-section: var(--space-56);
+
+  // En móvil las cards sobresalen 1 px del margen: 360 px en 390, como en el Figma.
+  --space-card-bleed: var(--space-1);
   --space-section-header: var(--space-40);
   --space-navbar-x: var(--space-lg);
   --space-navbar-tabs: var(--space-lg);
