@@ -24,11 +24,10 @@
   cursor: pointer;
 
   // El anillo va en un círculo del tamaño del icono (no en el botón de 24 px), con la separación
-  // de siempre, así queda ceñido al icono. El botón se eleva sobre la burbuja, que si no tapa el
-  // borde superior del anillo.
+  // de siempre, así queda ceñido al icono. La burbuja, cuando está abierta, queda por encima y tapa
+  // parte del anillo, no todo (WCAG 2.4.11).
   &:focus-visible {
     position: relative;
-    z-index: calc(var(--z-tooltip) + 1);
     outline: none;
     box-shadow: none;
 
